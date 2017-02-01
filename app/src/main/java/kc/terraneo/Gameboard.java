@@ -1,7 +1,7 @@
 package kc.terraneo;
 
 /**
- * Created by kcb11010 on 1/27/2017.
+ * Created by Kelsey Bull on 1/27/2017.
  */
 
 public class GameBoard {
@@ -33,8 +33,12 @@ public class GameBoard {
 
         for(int i=0; i< gridSide; i++)
         {
-
+            for(int j=0; j<gridSide; j++)
+            {
+                tiles[i][j] = new EmptyTile(new Position(i,j));
+            }
         }
+        tiles[radius][radius] = new SourceTile();
     }
 
     private class IllegalPlayerCountException extends Exception {

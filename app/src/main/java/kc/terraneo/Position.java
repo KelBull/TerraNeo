@@ -1,7 +1,7 @@
 package kc.terraneo;
 
 /**
- * Created by kcb11010 on 1/27/2017.
+ * Created by Kelsey Bull on 1/27/2017.
  */
 
 public class Position {
