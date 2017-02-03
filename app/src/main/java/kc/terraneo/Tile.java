@@ -17,12 +17,15 @@ class Tile extends BoardObject {
     private int color;
     protected String artPath;
     protected Position position;
-    private static String[] resonanceValues = {"empty","calm","agitated","violent"};
+    public static String[] resonanceValues = {"empty","calm","agitated","violent"};
     protected List<Tile> neighbors = new ArrayList<Tile>();
 
 
     /**
      *
+     * @param _resonance the resonance of the tile as specified by the index in resonanceValues
+     * @param _color the color of the tile
+     * @param p the position on the gameboard
      */
     public Tile(int _resonance, int _color, Position p)
     {
@@ -97,6 +100,11 @@ class Tile extends BoardObject {
     public void addNeighbor(Tile t)
     {
         neighbors.add(t);
+    }
+
+    public Position getPosition()
+    {
+        return position;
     }
 
 }
