@@ -15,6 +15,7 @@ class Tile extends BoardObject {
     private boolean hasTemple;
     private int resonance;
     private int color;
+    protected boolean isPassable;
     protected String artPath;
     protected Position position;
     public static String[] resonanceValues = {"empty","calm","agitated","violent"};
@@ -32,7 +33,8 @@ class Tile extends BoardObject {
         hasPlayer = false;
         hasTemple = false;
         isSiphoned = false;
-        position = p;
+        isPassable = false;
+        location = p;
         color = _color;
         resonance = _resonance;
         artPath = resonanceValues[_resonance];
@@ -77,10 +79,14 @@ class Tile extends BoardObject {
         return color;
     }
 
-    public boolean hasPlayer()
+    public boolean hasPlayerPawn()
     {
         return hasPlayer;
     }
+
+    public void addPlayerPawn() {hasPlayer=true;}
+
+    public void removePlayerPawn() {hasPlayer=false;}
 
     public boolean hasTemple()
     {
@@ -92,6 +98,8 @@ class Tile extends BoardObject {
         return isSiphoned;
     }
 
+    public boolean isPassable() {return isPassable;}
+
     public List<Tile> getNeighbors()
     {
         return neighbors;
@@ -102,9 +110,15 @@ class Tile extends BoardObject {
         neighbors.add(t);
     }
 
-    public Position getPosition()
+    public void setPassable()
     {
-        return position;
+        isPassable = true;
     }
+
+    public void setImpassable()
+    {
+        isPassable = false;
+    }
+
 
 }

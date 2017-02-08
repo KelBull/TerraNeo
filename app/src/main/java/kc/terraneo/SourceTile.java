@@ -11,5 +11,6 @@ public class SourceTile extends Tile {
     {
         super();
         artPath = "sourceTile.jpg";
+        isPassable = true;
     }
 }

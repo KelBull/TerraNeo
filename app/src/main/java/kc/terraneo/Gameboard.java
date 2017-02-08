@@ -54,8 +54,8 @@ public class GameBoard {
      */
     public void playTile(Tile t)
     {
-        int x = t.getPosition().getX();
-        int y = t.getPosition().getY();
+        int x = t.getLocation().getX();
+        int y = t.getLocation().getY();
         tiles[x][y] = t;
 
         if(x%2==0)
@@ -115,6 +115,33 @@ public class GameBoard {
             t.addNeighbor(tiles[x+1][y]);
             t.addNeighbor(tiles[x-1][y]);
         }
+    }
+
+    public void movePawn(Pawn p, Position destination)
+    {
+        try{
+            Position previous = p.getLocation();
+            p.move(destination);
+            tiles[destination.getX()][destination.getY()].addPlayerPawn();
+            tiles[previous.getX()][previous.getY()].removePlayerPawn();
+        }catch(Exception e){
+            //do something later
+        }
+    }
+
+    public Tile getSourceTile()
+    {
+        return tiles[radius][radius];
+    }
+
+    public Tile getTileAt(int x, int y)
+    {
+        return tiles[x][y];
+    }
+
+    public Tile getTileAt(Position p)
+    {
+        return tiles[p.getX()][p.getY()];
     }
 
     private class IllegalPlayerCountException extends Exception {

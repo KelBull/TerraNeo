@@ -5,4 +5,23 @@ package kc.terraneo;
  */
 
 public class Player {
+    private God myGod;
+    private Pawn myPawn;
+    public int score;
+
+    public Player(God g)
+    {
+        myGod = g;
+        myPawn = new Pawn(g.getColor(), this);
+    }
+
+    public God getGod()
+    {
+        return myGod;
+    }
+
+    public Pawn getMyPawn()
+    {
+        return myPawn;
+    }
 }
