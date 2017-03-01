@@ -67,6 +67,14 @@ class Tile extends BoardObject {
 
     public int getResonanceNum()
     {
+        switch(resonanceValues){
+            case Resonance.CALM: artPath += "calm";
+                break;
+            case Resonance.AGITATED: artPath += "agitated";
+                break;
+            case Resonance.VIOLENT: artPath += "voilent";
+                break;
+        }
         return resonance;
     }
 
