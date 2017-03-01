@@ -15,6 +15,7 @@ class Tile extends BoardObject {
     private boolean hasTemple;
     private int resonance;
     private int color;
+    private Temple t;
     protected boolean isPassable;
     protected String artPath;
     protected Position position;
@@ -93,6 +94,12 @@ class Tile extends BoardObject {
         return hasTemple;
     }
 
+    public void addTemple(Temple _t)
+    {
+        hasTemple = true;
+        t = _t;
+    }
+
     public boolean isSiphoned()
     {
         return isSiphoned;
@@ -118,6 +125,11 @@ class Tile extends BoardObject {
     public void setImpassable()
     {
         isPassable = false;
+    }
+
+    public Temple getTemple()
+    {
+        return t;
     }
 
 

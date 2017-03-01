@@ -42,7 +42,7 @@ class Pawn extends BoardObject {
         legalMoves.clear();
         List<Tile> possibleMoves = theBoard.getTileAt(location).getNeighbors();
         for (Tile t:possibleMoves){
-            if(t.isPassable()||(t.hasTemple()&&owner.getGod().hasMagic)||(t.hasPlayerPawn()&&owner.getGod().hasCrime))
+            if(t.isPassable()||(t.hasTemple()&&owner.equals(owner))||(t.hasTemple()&&owner.getGod().hasMagic)||(t.hasPlayerPawn()&&owner.getGod().hasCrime))
             {
                 legalMoves.add(t);
             }

@@ -7,12 +7,13 @@ import android.graphics.Color;
  */
 
 class God {
-    private Color c;
+    private Color color;
     public boolean hasCrime;
     public boolean hasMagic;
 
+
     public Color getColor()
     {
-        return c;
+        return color;
     }
 }
