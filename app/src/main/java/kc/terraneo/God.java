@@ -10,6 +10,7 @@ class God {
     private Color color;
     public boolean hasCrime;
     public boolean hasMagic;
+    public boolean hasDeath;
 
 
     public Color getColor()
