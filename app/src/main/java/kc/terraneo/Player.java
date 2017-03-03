@@ -9,7 +9,7 @@ import android.graphics.Color;
 public class Player {
     private God myGod;
     private Pawn myPawn;
-    private Color myColor;
+    private int myColor;
     public int score;
 
     public Player(God g)
@@ -29,7 +29,7 @@ public class Player {
         return myPawn;
     }
 
-    public Color getColor(){
+    public int getColor(){
         return myColor;
     }
 }

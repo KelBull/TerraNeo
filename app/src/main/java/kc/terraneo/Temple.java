@@ -9,7 +9,8 @@ import java.util.List;
 
 class Temple extends BoardObject {
     private Player owner;
-    private Color color;
+    private God g;
+    private int color;
     private int score;
 
     public Temple(Player _owner, Position loc)
@@ -17,6 +18,7 @@ class Temple extends BoardObject {
         location = loc;
         color = _owner.getColor();
         owner = _owner;
+        g = _owner.getGod();
         updateScore();
     }
 
@@ -27,10 +29,21 @@ class Temple extends BoardObject {
         score = 1;
         for(Tile t: neighbors)
         {
-            if(t.getResonance()==temp.getResonance())
-            {//TODO: Add resonance matching when player has the Death upgrade
+            if((t.getResonance()==temp.getResonance()&& !t.isSiphoned())
+                    ||(owner.getGod().hasDeath()&&t.isSiphoned()))
+            {
                 score++;
             }
         }
+    }
+
+    public Player getOwner()
+    {
+        return owner;
+    }
+
+    public God getGod()
+    {
+        return g;
     }
 }

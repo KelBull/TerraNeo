@@ -34,7 +34,7 @@ class Tile extends BoardObject {
         hasPlayer = false;
         hasTemple = false;
         isSiphoned = false;
-        isPassable = false;
+        isPassable = true;
         location = p;
         color = _color;
         resonance = _resonance;

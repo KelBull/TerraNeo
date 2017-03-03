@@ -10,14 +10,14 @@ import java.util.List;
  */
 
 class Pawn extends BoardObject {
-    private Color c;
+    private int color;
     private Player owner;
     protected List<Tile> legalMoves = new ArrayList<Tile>();
 
-    public Pawn(Color playerColor, Player _owner)
+    public Pawn(int playerColor, Player _owner)
     {
         location = theBoard.getSourceTile().getLocation();
-        c = playerColor;
+        color = playerColor;
         owner = _owner;
     }
 
@@ -30,7 +30,9 @@ class Pawn extends BoardObject {
     {
         if(legalMoves.contains(theBoard.getTileAt(destination)))
         {
+            theBoard.getTileAt(location).removePlayerPawn();
             location = destination;
+            theBoard.getTileAt(destination).addPlayerPawn();
         }else{
             throw new IllegalMoveException("The tile at: "+destination.getX()+", "+destination.getY()+" was not a legal move.");
         }
@@ -42,9 +44,17 @@ class Pawn extends BoardObject {
         legalMoves.clear();
         List<Tile> possibleMoves = theBoard.getTileAt(location).getNeighbors();
         for (Tile t:possibleMoves){
-            if(t.isPassable()||(t.hasTemple()&&owner.equals(owner))||(t.hasTemple()&&owner.getGod().hasMagic)||(t.hasPlayerPawn()&&owner.getGod().hasCrime))
-            {
-                legalMoves.add(t);
+            if(t.isPassable())
+            {//checks if it is a passable tile
+                if ((!t.hasTemple()) || (t.hasTemple() && t.getTemple().getOwner().equals(owner)) ||
+                        (t.hasTemple() && owner.getGod().hasMagic()))
+                {//check temple movement legality
+
+                    if (!t.hasPlayerPawn() || (t.hasPlayerPawn() && owner.getGod().hasCrime()))
+                    {//check for pawns
+                        legalMoves.add(t);
+                    }
+                }
             }
         }
     }
