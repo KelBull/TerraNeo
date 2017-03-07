@@ -1,6 +1,7 @@
 package kc.terraneo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -18,15 +19,12 @@ public class TileSource extends Source {
         {
             theTiles.push(tiles[i]);
         }
+        shuffle();
     }
 
     @Override
     public void shuffle() {
-        ArrayList<Tile> temp = new ArrayList<Tile>();
-        while(!theTiles.empty()) {
-            temp.add(theTiles.pop());
-        }
-
+        Collections.shuffle(theTiles);
     }
 
     @Override
