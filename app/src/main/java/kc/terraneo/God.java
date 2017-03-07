@@ -8,6 +8,7 @@ import android.graphics.Color;
 
 class God {
     static final int ORANGE = 0xFFFFA500;
+    private String artPath;
     private Player owner;
     private int color;
     private int nativeLand1;
@@ -38,37 +39,38 @@ class God {
         name.toLowerCase();
         switch(name)
         {
-            case "fskt": name="Fskt";
+            case "fskt": name="fskt";
                 color = Color.GREEN;
                 nativeLand1 = Color.YELLOW;
                 nativeLand2 = Color.BLUE;
                 break;
-            case "shaelys": name="Shaelys";
+            case "shaelys": name="shaelys";
                 color = Color.YELLOW;
                 nativeLand1 = Color.GREEN;
                 nativeLand2 = Color.YELLOW;
                 break;
-            case "pundr": name="Pundr";
+            case "pundr": name="pundr";
                 color = Color.RED;
                 nativeLand1 = Color.RED;
                 nativeLand2 = Color.GREEN;
                 break;
-            case "lomhae": name="Lomhae";
+            case "lomhae": name="lomhae";
                 color = Color.MAGENTA;
                 nativeLand1 = Color.RED;
                 nativeLand2 = Color.BLUE;
                 break;
-            case "tkyrll": name="Tkyrll";
+            case "tkyrll": name="tkyrll";
                 color = Color.BLUE;
                 nativeLand1 = Color.BLUE;
                 nativeLand2 = Color.GREEN;
                 break;
-            case "zolack": name="Zolack";
+            case "zolack": name="zolack";
                 color = ORANGE;
                 nativeLand1 = Color.YELLOW;
                 nativeLand2 = Color.RED;
                 break;
         }
+        artPath = name + ".png";
         upgradeCount = 0;
         hasCrime= false;
         hasMagic= false;
