@@ -8,6 +8,7 @@ import android.graphics.Color;
 
 class God {
     static final int ORANGE = 0xFFFFA500;
+    private Player owner;
     private int color;
     private int nativeLand1;
     private int nativeLand2;

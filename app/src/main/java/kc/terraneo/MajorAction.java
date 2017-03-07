@@ -5,4 +5,9 @@ package kc.terraneo;
  */
 
 public abstract class MajorAction extends Action {
+
+    @Override
+    public int getCost() {
+        return 2;
+    }
 }

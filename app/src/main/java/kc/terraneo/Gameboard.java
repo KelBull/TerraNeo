@@ -49,7 +49,7 @@ public class GameBoard {
     }
 
     /**
-     * Places a new tile and gives it it's neighbors
+     * Places a new tile and gives it its neighbors
      * @param t the tile to place
      */
     public void playTile(Tile t)
