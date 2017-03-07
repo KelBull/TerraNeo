@@ -5,4 +5,5 @@ package kc.terraneo;
  */
 
 public class Refresh extends MinorAction {
+
 }

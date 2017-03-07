@@ -5,7 +5,7 @@ package kc.terraneo;
  */
 
 abstract class BoardObject {
-    protected Position location;
+    protected Position location; //may be null if the object hasn't been placed on the board yet
     protected String artPath;
     protected GameBoard theBoard;
 

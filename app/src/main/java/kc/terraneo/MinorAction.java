@@ -5,4 +5,8 @@ package kc.terraneo;
  */
 
 public abstract class MinorAction extends Action {
+
+    public int getCost() {
+        return 1 ;
+    }
 }

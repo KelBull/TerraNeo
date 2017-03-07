@@ -12,6 +12,7 @@ class Temple extends BoardObject {
     private God g;
     private int color;
     private int score;
+    private boolean isPlaced;
 
     public Temple(Player _owner, Position loc)
     {
@@ -45,5 +46,15 @@ class Temple extends BoardObject {
     public God getGod()
     {
         return g;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public boolean isPlaced()
+    {
+        return isPlaced;
     }
 }

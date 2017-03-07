@@ -28,6 +28,7 @@ class Pawn extends BoardObject {
      */
     public void move(Position destination) throws IllegalMoveException
     {
+        updateLegalMoves();
         if(legalMoves.contains(theBoard.getTileAt(destination)))
         {
             theBoard.getTileAt(location).removePlayerPawn();

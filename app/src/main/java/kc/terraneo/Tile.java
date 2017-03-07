@@ -10,11 +10,11 @@ import java.util.List;
  */
 
 class Tile extends BoardObject {
-    private boolean hasPlayer;
-    private boolean isSiphoned;
-    private boolean hasTemple;
+    protected boolean hasPlayer;
+    protected boolean isSiphoned;
+    protected boolean hasTemple;
     private int resonance;
-    private int color;
+    protected int color;
     private Temple t;
     protected boolean isPassable;
     protected String artPath;
@@ -38,7 +38,7 @@ class Tile extends BoardObject {
         location = p;
         color = _color;
         resonance = _resonance;
-        artPath = resonanceValues[_resonance];
+        artPath = resonanceValues[_resonance] + "_";
 
         switch(color){
             case Color.RED: artPath += "fire";
@@ -49,9 +49,9 @@ class Tile extends BoardObject {
                 break;
             case Color.GREEN: artPath += "earth";
                 break;
-            case Color.BLACK: artPath += "blank";
+            case Color.BLACK: artPath += "black";
         }
-        artPath +=".jpg";
+        artPath +=".png";
     }
 
     protected Tile()
@@ -62,7 +62,7 @@ class Tile extends BoardObject {
         position = new Position(0,0);
         color = Color.BLACK;
         resonance = 0;
-        artPath = "emptyblank.jpg";
+        artPath = "black_tile.png";
     }
 
     public int getResonanceNum()

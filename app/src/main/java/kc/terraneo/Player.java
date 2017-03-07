@@ -10,7 +10,7 @@ public class Player {
     private God myGod;
     private Pawn myPawn;
     private int myColor;
-    public int score;
+    private int score;
 
     public Player(God g)
     {
@@ -31,5 +31,15 @@ public class Player {
 
     public int getColor(){
         return myColor;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public void updateScore()
+    {
+
     }
 }
