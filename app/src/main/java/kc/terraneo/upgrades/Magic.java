@@ -7,10 +7,12 @@ import kc.terraneo.Upgrade;
  */
 
 public class Magic extends Upgrade {
+    private String artPath;
 
     public Magic()
     {
         setCost(3);
         setName("Magic");
+        artPath = "card_magic.png";
     }
 }

@@ -7,8 +7,11 @@ import kc.terraneo.Upgrade;
  */
 
 public class Music extends Upgrade {
+    private String artPath;
+
     public Music(){
         setCost(3);
         setName("Music");
+        artPath = "card_music.png";
     }
 }

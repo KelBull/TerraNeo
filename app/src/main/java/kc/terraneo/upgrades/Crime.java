@@ -7,10 +7,12 @@ import kc.terraneo.Upgrade;
  */
 
 public class Crime extends Upgrade {
+    private String artPath;
 
     public Crime()
     {
         setCost(2);
         setName("Crime");
+        artPath = "card_crime.png";
     }
 }

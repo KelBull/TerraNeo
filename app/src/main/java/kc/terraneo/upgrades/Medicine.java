@@ -7,9 +7,11 @@ import kc.terraneo.Upgrade;
  */
 
 public class Medicine extends Upgrade {
+    private String artPath;
 
     public Medicine(){
         setCost(2);
         setName("Medicine");
+        artPath = "card_medicine.png";
     }
 }

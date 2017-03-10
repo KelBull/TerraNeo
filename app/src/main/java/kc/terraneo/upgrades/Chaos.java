@@ -7,10 +7,13 @@ import kc.terraneo.Upgrade;
  */
 
 public class Chaos extends Upgrade {
+    private String artPath;
 
     public Chaos()
     {
         setCost(4);
         setName("Chaos");
+        artPath = "card_chaos.png";
     }
+
 }

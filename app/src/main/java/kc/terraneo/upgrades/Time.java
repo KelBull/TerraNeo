@@ -7,9 +7,11 @@ import kc.terraneo.Upgrade;
  */
 
 public class Time extends Upgrade {
+    private String artPath;
 
     public Time(){
         setCost(4);
         setName("Time");
+        artPath = "card_time.png";
     }
 }

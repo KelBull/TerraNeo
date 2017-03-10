@@ -7,9 +7,11 @@ import kc.terraneo.Upgrade;
  */
 
 public class Death extends Upgrade {
+    private String artPath;
 
     public Death(){
         setCost(4);
         setName("Death");
+        artPath = "card_death.png";
     }
 }

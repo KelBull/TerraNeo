@@ -7,8 +7,11 @@ import kc.terraneo.Upgrade;
  */
 
 public class Cities extends Upgrade {
+    private String artPath;
+
     public Cities(){
         setCost(3);
         setName("Cities");
+        artPath = "card_cities.png";
     }
 }
