@@ -25,6 +25,11 @@ class Temple extends BoardObject {
 
     public void updateScore()
     {
+        if(!location.isOnBoard())
+        {
+            score =0;
+            return;
+        }
         Tile temp = theBoard.getTileAt(location);
         List<Tile> neighbors = temp.getNeighbors();
         score = 1;
@@ -36,6 +41,14 @@ class Temple extends BoardObject {
                 score++;
             }
         }
+    }
+
+    public void place(Position p)
+    {
+        location = p;
+        updateScore();
+        isPlaced = true;
+        g.placeTemple();
     }
 
     public Player getOwner()

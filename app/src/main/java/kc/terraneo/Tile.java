@@ -34,7 +34,7 @@ class Tile extends BoardObject {
         hasPlayer = false;
         hasTemple = false;
         isSiphoned = false;
-        isPassable = true;
+        isPassable = false;
         location = p;
         color = _color;
         resonance = _resonance;
@@ -59,10 +59,18 @@ class Tile extends BoardObject {
         hasPlayer = false;
         hasTemple = false;
         isSiphoned = false;
+        isPassable = false;
         position = new Position(0,0);
         color = Color.BLACK;
         resonance = 0;
         artPath = "black_tile.png";
+    }
+
+    public void place(Position p)
+    {
+        location = p;
+        isPassable = true;
+        theBoard.playTile(this);
     }
 
     public int getResonanceNum()
@@ -103,6 +111,11 @@ class Tile extends BoardObject {
     public boolean isSiphoned()
     {
         return isSiphoned;
+    }
+
+    public void siphon()
+    {
+        isSiphoned = true;
     }
 
     public boolean isPassable() {return isPassable;}

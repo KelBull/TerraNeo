@@ -14,6 +14,12 @@ public class Position {
         y = _y;
     }
 
+    public Position(Position p)
+    {
+        x = p.getX();
+        y = p.getY();
+    }
+
     public int getX()
     {
         return x;
@@ -22,5 +28,10 @@ public class Position {
     public int getY()
     {
         return y;
+    }
+
+    public boolean isOnBoard()
+    {
+        return true;
     }
 }

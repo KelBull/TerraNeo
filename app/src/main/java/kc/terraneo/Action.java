@@ -6,4 +6,6 @@ package kc.terraneo;
 
 public abstract class Action {
    public abstract int getCost();
+
+   public abstract void execute();
 }

@@ -2,6 +2,8 @@ package kc.terraneo;
 
 import android.graphics.Color;
 
+import java.util.ArrayList;
+
 /**
  * Created by Kelsey Bull on 1/20/2017.
  */
@@ -17,6 +19,7 @@ public class Player {
         myGod = g;
         myPawn = new Pawn(g.getColor(), this);
         myColor = g.getColor();
+        score = 0;
     }
 
     public God getGod()
@@ -24,7 +27,7 @@ public class Player {
         return myGod;
     }
 
-    public Pawn getMyPawn()
+    public Pawn getPawn()
     {
         return myPawn;
     }
@@ -40,6 +43,10 @@ public class Player {
 
     public void updateScore()
     {
-
+        ArrayList<Temple> theTemples = myGod.getTemples();
+        for(Temple t: theTemples)
+        {
+            score += t.getScore();
+        }
     }
 }

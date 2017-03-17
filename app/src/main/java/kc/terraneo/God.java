@@ -2,6 +2,8 @@ package kc.terraneo;
 
 import android.graphics.Color;
 
+import java.util.ArrayList;
+
 /**
  * Created by Kelsey on 1/20/2017.
  */
@@ -15,6 +17,8 @@ class God {
     private int nativeLand2;
     private int upgradeCount;
     private String name;
+    private ArrayList<Temple> temples;
+    private int templeCount;
     private boolean hasCrime;
     private boolean hasMagic;
     private boolean hasDeath;
@@ -90,6 +94,12 @@ class God {
         hasDreams= false;
         hasWealth= false;
         hasMedicine = false;
+        temples = new ArrayList<Temple>();
+        for(int i = 0; i<4; i++)
+        {
+            temples.add(new Temple(owner, new OffBoardPosition()));
+        }
+        templeCount = 4;
     }
 
 
@@ -110,76 +120,174 @@ class God {
         return color;
     }
 
+    public int getUpgradeCount()
+    {
+        return upgradeCount;
+    }
+
     public boolean hasCrime() {
         return hasCrime;
+    }
+    public void giveCrime(){
+        hasCrime = true;
+        upgradeCount++;
     }
 
     public boolean hasMagic() {
         return hasMagic;
     }
+    public void giveMagic(){
+        hasMagic = true;
+        upgradeCount++;
+    }
 
     public boolean hasDeath() {
         return hasDeath;
+    }
+    public void giveDeath(){
+        hasDeath = true;
+        upgradeCount++;
     }
 
     public boolean hasKnowledge() {
         return hasKnowledge;
     }
+    public void giveKnowledge(){
+        hasKnowledge = true;
+        upgradeCount++;
+    }
 
     public boolean hasChaos() {
         return hasChaos;
+    }
+    public void giveChaos(){
+        hasChaos = true;
+        upgradeCount++;
     }
 
     public boolean hasDestruction() {
         return hasDestruction;
     }
+    public void giveDestruction(){
+        hasDestruction = true;
+        upgradeCount++;
+    }
+
 
     public boolean hasInvention() {
         return hasInvention;
+    }
+    public void giveInvention(){
+        hasInvention = true;
+        upgradeCount++;
     }
 
     public boolean hasHarvests() {
         return hasHarvests;
     }
+    public void giveHarvests(){
+        hasHarvests = true;
+        upgradeCount++;
+    }
 
     public boolean hasMusic() {
         return hasMusic;
+    }
+    public void giveMusic(){
+        hasMusic = true;
+        upgradeCount++;
     }
 
     public boolean hasWar() {
         return hasWar;
     }
+    public void giveWar(){
+        hasWar = true;
+        upgradeCount++;
+    }
 
     public boolean hasPlague() {
         return hasPlague;
     }
+    public void givePlague(){
+        hasPlague = true;
+        upgradeCount++;
+    }
 
     public boolean hasGames() {
         return hasGames;
+    }
+    public void giveGames(){
+        hasGames = true;
+        upgradeCount++;
     }
 
     public boolean hasCities() {
         return hasCities;
     }
 
+    /**
+     * gives the god the effect of the cities upgrade.
+     */
+    public void giveCities(){
+        hasCities = true;
+        upgradeCount++;
+        temples.add(new Temple(owner, new OffBoardPosition()));
+    }
+
+    public int getTempleCount()
+    {
+        return templeCount;
+    }
+
+    public void placeTemple()
+    {
+        templeCount--;
+    }
+
     public boolean hasTime() {
         return hasTime;
+    }
+    public void giveTime(){
+        hasTime = true;
+        upgradeCount++;
     }
 
     public boolean hasExploration() {
         return hasExploration;
     }
+    public void giveExploration(){
+        hasExploration = true;
+        upgradeCount++;
+    }
 
     public boolean hasDreams() {
         return hasDreams;
+    }
+    public void giveDreams(){
+        hasDreams = true;
+        upgradeCount++;
     }
 
     public boolean hasWealth() {
         return hasWealth;
     }
+    public void giveWealth(){
+        hasWealth = true;
+        upgradeCount++;
+    }
 
     public boolean hasMedicine() {
         return hasMedicine;
+    }
+    public void giveMedicine(){
+        hasMedicine = true;
+        upgradeCount++;
+    }
+
+    public ArrayList<Temple> getTemples()
+    {
+        return temples;
     }
 
 }

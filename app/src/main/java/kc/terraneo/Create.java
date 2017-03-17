@@ -5,4 +5,18 @@ package kc.terraneo;
  */
 
 public class Create extends MinorAction {
+    Tile t;
+    Position p;
+
+
+    public Create(Tile _t, Position _p)
+    {
+        t= _t;
+        p = _p;
+    }
+
+    @Override
+    public void execute() {
+        t.place(p);
+    }
 }

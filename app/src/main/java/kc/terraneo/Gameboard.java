@@ -115,6 +115,10 @@ public class GameBoard {
             t.addNeighbor(tiles[x+1][y]);
             t.addNeighbor(tiles[x-1][y]);
         }
+        for(Tile _t: t.getNeighbors())
+        {
+            _t.addNeighbor(t);
+        }
     }
 
     public void movePawn(Pawn p, Position destination)

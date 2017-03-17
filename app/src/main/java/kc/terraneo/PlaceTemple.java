@@ -5,4 +5,18 @@ package kc.terraneo;
  */
 
 public class PlaceTemple extends MajorAction {
+    private Temple t;
+    private Position p;
+    private Player owner;
+
+    public PlaceTemple(Player _owner, Position _p)
+    {
+        p = _p;
+        owner = _owner;
+    }
+
+    @Override
+    public void execute() {
+        t.place(p);
+    }
 }
