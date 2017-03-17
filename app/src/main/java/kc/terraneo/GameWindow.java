@@ -1,4 +1,4 @@
-package kc.terraneo.upgrades;
+package kc.terraneo;
 
 import android.annotation.SuppressLint;
 import android.support.v7.app.ActionBar;
