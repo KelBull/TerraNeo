@@ -18,4 +18,6 @@ abstract class BoardObject {
     {
         return artPath;
     }
+
+    public GameBoard getBoard(){return theBoard;}
 }

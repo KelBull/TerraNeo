@@ -20,7 +20,7 @@ class Tile extends BoardObject {
     protected String artPath;
     protected Position position;
     public static String[] resonanceValues = {"empty","calm","agitated","violent"};
-    protected List<Tile> neighbors = new ArrayList<Tile>();
+    protected ArrayList<Tile> neighbors = new ArrayList<Tile>();
 
 
     /**
@@ -120,9 +120,27 @@ class Tile extends BoardObject {
 
     public boolean isPassable() {return isPassable;}
 
-    public List<Tile> getNeighbors()
+    public ArrayList<Tile> getNeighbors()
     {
         return neighbors;
+    }
+
+    public ArrayList<Tile> getExtendedNeighbors()
+    {
+        ArrayList<Tile> eNeighbors = new ArrayList<>();
+        for (Tile t: neighbors)
+        {
+            eNeighbors.add(t);
+            ArrayList<Tile> temp = (ArrayList<Tile>) t.getNeighbors();
+            for (Tile tt: temp){
+                if(!eNeighbors.contains(tt))
+                {
+                    eNeighbors.add(tt);
+                }
+            }
+        }
+        eNeighbors.remove(this);
+        return eNeighbors;
     }
 
     public void addNeighbor(Tile t)
@@ -138,6 +156,19 @@ class Tile extends BoardObject {
     public void setImpassable()
     {
         isPassable = false;
+    }
+
+    public void setOffBoard(){
+        location = new OffBoardPosition();
+    }
+
+    /**
+     * This should only ever be called if the position is being changed via chaos
+     *
+     */
+    public void setPosition(Position p)
+    {
+        location = p;
     }
 
     public Temple getTemple()

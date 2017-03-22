@@ -40,6 +40,14 @@ class Pawn extends BoardObject {
         updateLegalMoves();
     }
 
+    public void moveToTemple(Temple destination)
+    {
+        theBoard.getTileAt(location).removePlayerPawn();
+        location = destination.getLocation();
+        theBoard.getTileAt(location).addPlayerPawn();
+        updateLegalMoves();
+    }
+
     private void updateLegalMoves()
     {
         legalMoves.clear();
