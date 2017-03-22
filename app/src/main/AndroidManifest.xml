@@ -10,8 +10,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Client"
+            android:screenOrientation="sensorLandscape"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
 
         <activity
