@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.WindowManager;
 
 public class Client extends AppCompatActivity {
-    GameBoard gBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
