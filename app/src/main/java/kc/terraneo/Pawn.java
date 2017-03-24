@@ -73,4 +73,16 @@ class Pawn extends BoardObject {
             super(s);
         }
     }
+
+    public boolean isInRange(Tile target)
+    {
+        Tile start =  theBoard.getTileAt(location);
+        if(start.getNeighbors().contains(target)||
+                (start.hasTemple()&& start.getExtendedNeighbors().contains(target)))
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

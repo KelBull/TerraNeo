@@ -15,17 +15,23 @@ public class MedicineAction extends MinorAction {
      */
     public MedicineAction(Tile _target, Pawn _pawn)
     {
-
+        target = _target;
+        thePawn = _pawn;
     }
     @Override
     public void execute() {
-
+        target.unsiphon();
     }
 
+    /**
+     * checks the validity of using medicine on the target tile from the chosen pawn
+     * @param t the tile to be unsiphoned
+     * @param p the pawn that will unsiphon it
+     * @return true if this is a valid action, false otherwise
+     */
     public static  boolean isValid(Tile t, Pawn p)
     {
-        if(t.isSiphoned()&&(p.getBoard().getTileAt(p.getLocation()).getNeighbors().contains(t)||
-        p.getBoard().getTileAt(p.getLocation()).hasTemple()&& p.getBoard().getTileAt(p.getLocation()).getExtendedNeighbors().contains(t)))
+        if(t.isSiphoned()&&p.isInRange(t))
         {
             return true;
         }else{
