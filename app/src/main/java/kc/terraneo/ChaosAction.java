@@ -26,18 +26,19 @@ public class ChaosAction extends MajorAction {
 
     /**
      * returns true if the two tiles are valid to be swapped
+     * @param owner the pawn doing the swapping
      * @param tar1 the first tile to be swapped
      * @param tar2 the tile to swap with
      * @return true if they can be swapped
      */
-    public static boolean isValid(Tile tar1, Tile tar2)
+    public static boolean isValid(Pawn owner, Tile tar1, Tile tar2)
     {
-        if(tar1.hasPlayerPawn()||tar1.hasTemple()||tar1.isSiphoned()||
-                tar2.hasPlayerPawn()||tar2.hasTemple()||tar2.isSiphoned())
+        if((!tar1.hasPlayerPawn()||!tar1.hasTemple()||!tar1.isSiphoned()||
+                !tar2.hasPlayerPawn()||!tar2.hasTemple()||!tar2.isSiphoned())&&owner.isInRange(tar1)&&owner.isInRange(tar2))
         {
-            return false;
-        }else{
             return true;
+        }else{
+            return false;
         }
     }
 }

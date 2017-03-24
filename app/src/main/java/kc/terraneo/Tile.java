@@ -118,6 +118,8 @@ class Tile extends BoardObject {
         isSiphoned = true;
     }
 
+    public void unsiphon(){isSiphoned = false;}
+
     public boolean isPassable() {return isPassable;}
 
     public ArrayList<Tile> getNeighbors()
@@ -176,5 +178,9 @@ class Tile extends BoardObject {
         return t;
     }
 
+    public boolean isEmptyTile()
+    {
+        return false;
+    }
 
 }

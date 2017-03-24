@@ -12,4 +12,9 @@ public class EmptyTile extends Tile {
         position = p;
         artPath = "black_tile.png";
     }
+
+    public boolean isEmptyTile()
+    {
+        return true;
+    }
 }

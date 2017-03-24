@@ -28,4 +28,14 @@ public class TimeAction extends MajorAction {
         sourceTarget.push(target);
         temp.place(p);
     }
+
+    public static boolean isValid(Pawn p, Tile tar)
+    {
+        if(p.isInRange(tar) && !tar.isSiphoned() && !tar.hasPlayerPawn() && !tar.hasTemple())
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

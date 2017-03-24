@@ -5,18 +5,32 @@ package kc.terraneo;
  */
 
 public class Create extends MinorAction {
-    Tile t;
+    Tile target;
     Position p;
+    Pawn owner;
 
 
-    public Create(Tile _t, Position _p)
+    public Create(Tile _t, Position _p, Pawn _owner)
     {
-        t= _t;
+        target= _t;
         p = _p;
+        owner = _owner;
     }
 
     @Override
     public void execute() {
-        t.place(p);
+        target.place(p);
+    }
+
+
+    public static boolean isValid(Tile _target, Position _p, Pawn _owner)
+    {
+        if(_owner.isInRange(_target) && _owner.getBoard().getTileAt(_p).isEmptyTile())
+        {
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }
