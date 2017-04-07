@@ -3,10 +3,14 @@ package kc.terraneo;
  * Created by John Candido.
  */
 
-import android.content.Context;
+import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -16,9 +20,10 @@ GAME BOARD SET UP
 if 2 or 3 players  |    if 4 players     |    if 5 or 6 players
     radius = 3     |     radius = 4      |      radius = 5
 */
-public class GridView extends View {
+public class GridView extends View implements View.OnTouchListener {
 
     private RelativeLayout mRelativeLayout;
+    private Activity activity;
     private GameBoard boardSize;
     private Paint rowPaint;
     int hexSize = 50;
@@ -28,12 +33,41 @@ public class GridView extends View {
     float leftMargin;
 
 
-    public GridView(Context context, GameBoard board) {
+    public GridView(Activity context, GameBoard board) {
         super(context);
         boardSize = board;
         rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        rowPaint.setColor(0xffff0000);
-        rowPaint.setTextSize(4 * hexSize / 5);
+        rowPaint.setColor(0xffff0000); // sets the color of the grid
+        rowPaint.setStrokeWidth(2); // sets line width of the grid
+        activity = context;
+        setOnTouchListener(this);
+    }
+
+    public boolean AddTile(Tile tile, float x, float y){ //move a tile
+        return false;
+    }
+
+    public Tile ChooseTile(GameBoard board, float x, float y){ //select a tile that has already been played
+        float edgeX = x - r;
+        float edgeY = y + (S / 2) * r;
+        int radius = 3;
+        int column;
+        int row;
+
+        for (column = 0; column < radius*2+1; column++){
+            float cx = computeCenterX(column);
+            if (edgeX < cx){
+                break;
+            }
+        }
+        for (row = 0; row< radius*2+1; row++){
+            float cy = computeCenterY(column, row);
+            if (edgeY > cy){
+                break;
+            }
+        }
+        Log.i ("terraneo", "found " + x + "," + y + " at " + column + "," + row);
+        return null;
     }
 
     private void drawHex(Canvas canvas, int x, int y) { //draws a hex
@@ -271,11 +305,30 @@ public class GridView extends View {
         }
         return last;
     }
-
+    private void drawTile(Canvas canvas, int row, int column, Drawable image){
+        float cy;
+        float cx = computeCenterX(column);
+        cy = computeCenterY(column, row);
+        float scale = 2 * (r/150);
+        Drawable scaled = new ScaleDrawable(image, Gravity.CENTER, scale, scale);
+        image.setBounds((int)(cx-r), (int)(cy-r*(S/2)), (int)(cx +r), (int)(cy+r*(S/2)));
+       // image.setBounds(350,150,500,300);
+        image.draw(canvas);
+    }
         @Override
-        protected void onDraw (Canvas canvas){ //draws the grid
+        public  boolean onTouch (View view, MotionEvent event){
+            switch (event.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    ChooseTile (null, event.getX(), event.getY());
+                    break;
+            }
+            return false;
+        }
+        @Override
+        protected void onDraw (Canvas canvas){ //draws the grid\
 
             super.onDraw(canvas);
+            canvas.drawColor(0xff000000); //set the color of the background
             float h = getHeight()-30; //gets the height of the screen
             float w = getWidth()-30; //gets the width of the screen
             int radius = 3;
@@ -296,6 +349,8 @@ public class GridView extends View {
                     drawHex(canvas, column, row);
                 }
             }
+            Drawable tileimage = activity.getResources().getDrawable(R.drawable.empty_hex);
+            drawTile(canvas, 3, 3, tileimage);
         }
 }
 
