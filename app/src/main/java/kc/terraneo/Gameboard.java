@@ -16,7 +16,7 @@ public class GameBoard {
      * @param _numPlayers the number of players in the game, between 2 and 6 inclusive
      * @throws IllegalPlayerCountException if there aren't a legal number of players
      */
-    public GameBoard(int _numPlayers) throws IllegalPlayerCountException {
+    public GameBoard(int _numPlayers) {
         switch(_numPlayers){
             case 2: radius = 3;
                 break;
@@ -28,7 +28,7 @@ public class GameBoard {
                 break;
             case 6: radius = 5;
                 break;
-            default: throw new IllegalPlayerCountException("Illegal player count "+ _numPlayers +" is not a legal player count");
+            //default: throw new IllegalPlayerCountException("Illegal player count "+ _numPlayers +" is not a legal player count");
 
         }
         gridSide = 2*radius+1;
@@ -142,6 +142,8 @@ public class GameBoard {
     {
         return tiles[x][y];
     }
+
+    public int getRadius(){return radius;}
 
     public Tile getTileAt(Position p)
     {

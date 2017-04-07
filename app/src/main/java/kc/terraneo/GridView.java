@@ -15,22 +15,7 @@ import android.widget.RelativeLayout;
 GAME BOARD SET UP
 if 2 or 3 players  |    if 4 players     |    if 5 or 6 players
     radius = 3     |     radius = 4      |      radius = 5
-
-    H H H H              H H H H H              H H H H H H
-   H H H H H            H H H H H H            H H H H H H H
-  H H H H H H          H H H H H H H          H H H H H H H H
- H H H 0 H H H        H H H H H H H H        H H H H H H H H H
-  H H H H H H        H H H H 0 H H H H      H H H H H H H H H H
-   H H H H H          H H H H H H H H      H H H H H 0 H H H H H
-    H H H H            H H H H H H H        H H H H H H H H H H
-                        H H H H H H          H H H H H H H H H
-                         H H H H H            H H H H H H H H
-                                               H H H H H H H
-                                                H H H H H H
-
- */
-
-
+*/
 public class GridView extends View {
 
     private RelativeLayout mRelativeLayout;
@@ -75,7 +60,7 @@ public class GridView extends View {
         canvas.drawLine(Dx, Dy, Ex, Ey, rowPaint); //Point D to E
         canvas.drawLine(Ex, Ey, Fx, Fy, rowPaint); //Point E to F
         canvas.drawLine(Fx, Fy, Ax, Ay, rowPaint); //Point F to A
-         Log.i("neo gen", "drawing hex "+x+","+y+" centered at "+cx+","+cy);
+        Log.i("neo gen", "drawing hex " + x + "," + y + " centered at " + cx + "," + cy);
 //        Log.i("neo gen", "points: "+Ax+","+Ay+" "+Bx+","+By+" "+
 //                Cx+","+Cy+" "+Dx+","+Dy+" "+Ex+","+Ey+" "+Fx+","+Fy);
     }
@@ -83,9 +68,9 @@ public class GridView extends View {
     private float computeCenterY(int x, int y) {
         float cy;
         if (x % 2 == 0) {
-            cy = getHeight() - (y * S * r + (S/2) * r + (S/2) * r + topMargin);
+            cy = getHeight() - (y * S * r + (S / 2) * r + (S / 2) * r + topMargin);
         } else
-            cy = getHeight() - (y * S * r + (S/2) * r + topMargin);
+            cy = getHeight() - (y * S * r + (S / 2) * r + topMargin);
         return cy;
     }
 
@@ -94,7 +79,7 @@ public class GridView extends View {
     }
 
     private int firstColumn(int row, int radius) {
-        int start =-1;
+        int start = -1;
         if (radius == 3) {
             switch (row) {
                 case 0:
@@ -119,8 +104,7 @@ public class GridView extends View {
                     start = 3;
                     break;
             }
-        }
-        else if (radius == 4){
+        } else if (radius == 4) {
             switch (row) {
                 case 0:
                     start = 4;
@@ -147,6 +131,42 @@ public class GridView extends View {
                     start = 1;
                     break;
                 case 8:
+                    start = 3;
+                    break;
+            }
+        } else if (radius == 5) {
+            switch (row) {
+                case 0:
+                    start = 6;
+                    break;
+                case 1:
+                    start = 4;
+                    break;
+                case 2:
+                    start = 2;
+                    break;
+                case 3:
+                    start = 0;
+                    break;
+                case 4:
+                    start = 0;
+                    break;
+                case 5:
+                    start = 0;
+                    break;
+                case 6:
+                    start = 0;
+                    break;
+                case 7:
+                    start = 0;
+                    break;
+                case 8:
+                    start = 0;
+                    break;
+                case 9:
+                    start = 1;
+                    break;
+                case 10:
                     start = 3;
                     break;
             }
@@ -209,6 +229,43 @@ public class GridView extends View {
                     break;
                 case 8:
                     last = 5;
+                    break;
+            }
+        }
+        else if (radius == 5){
+            switch (row) {
+                case 0:
+                    last = 4;
+                    break;
+                case 1:
+                    last = 6;
+                    break;
+                case 2:
+                    last = 8;
+                    break;
+                case 3:
+                    last = 10;
+                    break;
+                case 4:
+                    last = 10;
+                    break;
+                case 5:
+                    last = 10;
+                    break;
+                case 6:
+                    last = 10;
+                    break;
+                case 7:
+                    last = 10;
+                    break;
+                case 8:
+                    last = 10;
+                    break;
+                case 9:
+                    last = 9;
+                    break;
+                case 10:
+                    last = 7;
                     break;
             }
         }
