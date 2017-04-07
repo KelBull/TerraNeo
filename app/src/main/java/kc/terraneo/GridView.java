@@ -291,15 +291,6 @@ public class GridView extends View {
 
 //            Log.i("neo gen", "drawing grid with r="+r);
 
-           /* drawHex(canvas, 5, 5);
-            drawHex(canvas, 4, 5);
-            drawHex(canvas, 6, 5);
-            drawHex(canvas, 5, 4);
-            drawHex(canvas, 5, 6);
-            drawHex(canvas, 6, 6);
-            drawHex(canvas, 6, 4);
-            drawHex(canvas, 4, 6);
-            drawHex(canvas, 4, 4);*/
             for (int row = 0; row < numTiles; row++) {
                 for (int column = firstColumn(row, radius); column <= lastColumn(row, radius); column++) {
                     drawHex(canvas, column, row);
