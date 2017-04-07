@@ -1,6 +1,7 @@
 package kc.terraneo;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -44,6 +45,9 @@ public class GameWindow extends AppCompatActivity {
     TileSource tS4;
     ArrayList<Tile> masterTileList;
     ArrayList<Upgrade> masterUpgradeList;
+    ArrayList<Player> players;
+    Intent intent;
+    private int numPlayers;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -118,7 +122,7 @@ public class GameWindow extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        numPlayers = 0;
         setContentView(R.layout.activity_game_window);
 
         mVisible = true;
@@ -138,6 +142,16 @@ public class GameWindow extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        intent = new Intent(this, SetPlayerCount.class);
+        startActivityForResult(intent, 5);
+        start();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 5) {
+            numPlayers = resultCode;
+        }
     }
 
     @Override
@@ -193,11 +207,12 @@ public class GameWindow extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
+    // public void setNumPlayers(int i){numPlayers = i;}
+
     /**
      * starts the game client up for a new session. This should only ever be run once/game
-     * @param numPlayers the number of players
      */
-    private void start(int numPlayers)
+    private void start()
     {
         try {
             gBoard = new GameBoard(numPlayers);
@@ -240,7 +255,7 @@ public class GameWindow extends AppCompatActivity {
 
         for(int i=0; i<numPlayers; i++)
         {
-            //TODO: add a popup that asks each player to pick a god
+
         }
     }
 

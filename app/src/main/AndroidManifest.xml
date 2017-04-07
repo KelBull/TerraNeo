@@ -10,22 +10,21 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Client"
-            android:screenOrientation="sensorLandscape"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
         <GridView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/gridview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:padding="0dp"
-            android:verticalSpacing="0dp"
+            android:columnWidth="0dp"
+            android:gravity="top"
             android:horizontalSpacing="0dp"
             android:numColumns="4"
-            android:columnWidth="0dp"
+            android:padding="0dp"
             android:stretchMode="columnWidth"
-            android:gravity="top"
-            />
+            android:verticalSpacing="0dp" />
 
         <activity
             android:name=".GameWindow"
@@ -39,6 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SetPlayerCount"></activity>
     </application>
 
 </manifest>
