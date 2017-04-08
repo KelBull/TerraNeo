@@ -1,5 +1,6 @@
 package kc.terraneo;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,9 +27,17 @@ public class Client extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-        GameBoard board = new GameBoard(4);
+
+
+     /* commenting this out for an experiment to shift the launch order so as to dynamically assign
+     player count
+
+     GameBoard board = new GameBoard(4);
         ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
-        V.addView(new GridView(this, board));
+        V.addView(new GridView(this, board));*/
+        Intent intent = new Intent(this, SetPlayerCount.class);
+        intent.setFlags(0);
+        startActivity(intent);
     }
 
     @Override

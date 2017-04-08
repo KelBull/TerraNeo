@@ -18,6 +18,7 @@ class God {
     private int upgradeCount;
     private String name;
     private ArrayList<Temple> temples;
+    private final static String[] godNames = {"fskt","shaelys","pundr","lomhae","tkyrll","zolack"};
     private int templeCount;
     private boolean hasCrime;
     private boolean hasMagic;
@@ -40,8 +41,8 @@ class God {
 
     public God(String _name)
     {
-        name.toLowerCase();
-        switch(name)
+        _name.toLowerCase();
+        switch(_name)
         {
             case "fskt": name="fskt";
                 color = Color.GREEN;
@@ -95,13 +96,18 @@ class God {
         hasWealth= false;
         hasMedicine = false;
         temples = new ArrayList<Temple>();
+        templeCount = 4;
+    }
+
+    public void setOwner(Player p)
+    {
+        owner = p;
         for(int i = 0; i<4; i++)
         {
             temples.add(new Temple(owner, new OffBoardPosition()));
         }
-        templeCount = 4;
     }
-
+    public static String[] getGodNames(){return godNames;}
 
     public String getName() {
         return name;

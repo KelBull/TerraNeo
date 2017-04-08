@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,6 +49,8 @@ public class GameWindow extends AppCompatActivity {
     ArrayList<Player> players;
     Intent intent;
     private int numPlayers;
+
+    God[] remainingGods;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -122,7 +125,17 @@ public class GameWindow extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_grid);
+
         numPlayers = 0;
+
+        remainingGods  = new God[6];
+        remainingGods[0] = new God("fskt");
+        remainingGods[1] = new God("shaelys");
+        remainingGods[2] = new God("pundr");
+        remainingGods[3] = new God("lomhae");
+        remainingGods[4] = new God("tkyrll");
+        remainingGods[5] = new God("zolack");
         setContentView(R.layout.activity_game_window);
 
         mVisible = true;
@@ -142,15 +155,47 @@ public class GameWindow extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-        intent = new Intent(this, SetPlayerCount.class);
-        startActivityForResult(intent, 5);
+
+
+       // intent = new Intent(this.getApplicationContext(), SetPlayerCount.class);
+        //intent.setFlags(0);
+        //startActivity(intent);
         start();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 5) {
-            numPlayers = resultCode;
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super(requestCode, resultCode, data);
+        switch(resultCode){
+            case 10000:
+            numPlayers = resultCode-999;
+                break;
+            case 10010:
+                players.add(new Player(remainingGods[0]));
+                remainingGods[0]=null;
+                break;
+            case 10011:
+                players.add(new Player(remainingGods[1]));
+                remainingGods[1]=null;
+                break;
+            case 10012:
+                players.add(new Player(remainingGods[2]));
+                remainingGods[2]=null;
+                break;
+            case 10013:
+                players.add(new Player(remainingGods[3]));
+                remainingGods[3]=null;
+                break;
+            case 10014:
+                players.add(new Player(remainingGods[4]));
+                remainingGods[4]=null;
+                break;
+            case 10015:
+                players.add(new Player(remainingGods[5]));
+                remainingGods[5]=null;
+                break;
+
+
         }
     }
 
@@ -253,10 +298,14 @@ public class GameWindow extends AppCompatActivity {
         uS2 = new UpgradeSource(u2);
         uS3 = new UpgradeSource(u3);
 
+
         for(int i=0; i<numPlayers; i++)
         {
-
+            //start at new activity to give each player a god
         }
+
+        ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
+        V.addView(new GridView(this, gBoard));
     }
 
     /**

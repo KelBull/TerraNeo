@@ -17,9 +17,10 @@ public class Player {
     public Player(God g)
     {
         myGod = g;
+        myGod.setOwner(this);
         myPawn = new Pawn(g.getColor(), this);
         myColor = g.getColor();
-        score = 0;
+        updateScore();
     }
 
     public God getGod()
@@ -43,6 +44,7 @@ public class Player {
 
     public void updateScore()
     {
+        score = 0;
         ArrayList<Temple> theTemples = myGod.getTemples();
         for(Temple t: theTemples)
         {

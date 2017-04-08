@@ -39,12 +39,9 @@ public class SetPlayerCount extends AppCompatActivity {
         {
             playerCount = (Integer.valueOf(typer.getText().toString())).intValue();
             Log.i("done clicked","playerCount got: "+String.valueOf(playerCount));
-            if(playerCount>=minPlayers&&playerCount<=maxPlayers)
-            {
-                setResult(playerCount);
-                returnIntent.putExtra("playerCount",returnIntent);
-                finish();
-            }
+            returnIntent = new Intent(this, ChooseGod.class);
+            returnIntent.putExtra("player count", playerCount);
+            startActivity(returnIntent);
         }catch(Exception e)
         {
             Log.i("Error", "When done key was pressed, "+e.toString());
