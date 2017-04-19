@@ -1,8 +1,9 @@
 package kc.terraneo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,8 +24,17 @@ public class StartMenu extends AppCompatActivity {
         newGameButton.setText("New Game");
         settingsButton.setText("Settings");
         quitButton.setText("Quit");
-        intent = new Intent(this, GameWindow.class);
+        intent = new Intent(this, SetPlayerCount.class);
 
+        Button NewGame = (Button) findViewById(R.id.New_Game);
+        NewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StartMenu.this, SetPlayerCount.class);
+                startActivity(intent);
+                Log.i("clicks", "you have clicked New Game");
+            }
+        });
     }
 
     public void start()

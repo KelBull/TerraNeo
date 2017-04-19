@@ -1,6 +1,5 @@
 package kc.terraneo;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +18,9 @@ public class Client extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-     /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,15 +30,15 @@ public class Client extends AppCompatActivity {
         });*/
 
 
-     /* commenting this out for an experiment to shift the launch order so as to dynamically assign
-     player count
+     //commenting this out for an experiment to shift the launch order so as to dynamically assign
+     //player count
 
      GameBoard board = new GameBoard(4);
         ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
-        V.addView(new GridView(this, board));*/
-        Intent intent = new Intent(this, SetPlayerCount.class);
-        intent.setFlags(0);
-        startActivity(intent);
+        V.addView(new GridView(this, board));
+       // Intent intent = new Intent(this, SetPlayerCount.class);
+      //  intent.setFlags(0);
+       // startActivity(intent);
     }
 
     @Override

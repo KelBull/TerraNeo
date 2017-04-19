@@ -31,6 +31,7 @@ public class GridView extends View implements View.OnTouchListener {
     public static final float S = (float) Math.sqrt(3); //square root of 3
     float topMargin;
     float leftMargin;
+    int Count =4;
 
 
     public GridView(Activity context, GameBoard board) {
@@ -40,6 +41,7 @@ public class GridView extends View implements View.OnTouchListener {
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
         activity = context;
+
         setOnTouchListener(this);
     }
 
@@ -47,10 +49,11 @@ public class GridView extends View implements View.OnTouchListener {
         return false;
     }
 
+
     public Tile ChooseTile(GameBoard board, float x, float y){ //select a tile that has already been played
         float edgeX = x - r;
         float edgeY = y + (S / 2) * r;
-        int radius = 3;
+        int radius = Count;
         int column;
         int row;
 
@@ -331,7 +334,7 @@ public class GridView extends View implements View.OnTouchListener {
             canvas.drawColor(0xff000000); //set the color of the background
             float h = getHeight()-30; //gets the height of the screen
             float w = getWidth()-30; //gets the width of the screen
-            int radius = 3;
+            int radius = Count;
             int numTiles = radius * 2 + 1;
 
             float maxWidth = w / (1.5f * numTiles);
@@ -340,7 +343,7 @@ public class GridView extends View implements View.OnTouchListener {
             r = Math.min(maxWidth, maxHeight); //calculates the radius of each hex
 
             leftMargin = (getWidth()-(r*numTiles*1.5f))/2;
-            topMargin = (getHeight()-(r*numTiles*S))/2;
+            topMargin = ((getHeight()-(r*numTiles*S))/2)-25;
 
 //            Log.i("neo gen", "drawing grid with r="+r);
 
@@ -350,7 +353,7 @@ public class GridView extends View implements View.OnTouchListener {
                 }
             }
             Drawable tileimage = activity.getResources().getDrawable(R.drawable.empty_hex);
-            drawTile(canvas, 3, 3, tileimage);
+            drawTile(canvas, radius, radius, tileimage);
         }
 }
 

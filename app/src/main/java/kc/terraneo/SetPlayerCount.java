@@ -32,14 +32,16 @@ public class SetPlayerCount extends AppCompatActivity {
         done.setText("Set Player Count");
         returnIntent = new Intent();
     }
+    public void onClick(View v) {
 
+    }
     public void done(View v)
     {
         try
         {
             playerCount = (Integer.valueOf(typer.getText().toString())).intValue();
             Log.i("done clicked","playerCount got: "+String.valueOf(playerCount));
-            returnIntent = new Intent(this, ChooseGod.class);
+            returnIntent = new Intent(this, Client.class);
             returnIntent.putExtra("player count", playerCount);
             startActivity(returnIntent);
         }catch(Exception e)
