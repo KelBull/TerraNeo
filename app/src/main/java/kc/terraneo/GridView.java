@@ -25,6 +25,7 @@ public class GridView extends View implements View.OnTouchListener {
     private RelativeLayout mRelativeLayout;
     private Activity activity;
     private GameBoard gameBoard;
+    private GameWindow gameWindow;
     private Paint rowPaint;
     int hexSize = 50;
     private float r;
@@ -32,11 +33,14 @@ public class GridView extends View implements View.OnTouchListener {
     float topMargin;
     float leftMargin;
     int radius;
+    Client parent;
 
 
-    public GridView(Activity context, GameBoard board) {
+    public GridView(Client context, GameBoard board, GameWindow window) {
         super(context);
+        parent = context;
         gameBoard = board;
+        gameWindow = window;
         rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
@@ -45,7 +49,9 @@ public class GridView extends View implements View.OnTouchListener {
         setOnTouchListener(this);
     }
 
-    public boolean AddTile(Tile tile, float x, float y){ //move a tile
+    public boolean AddTile(Tile tile, float x, float y)
+    { //move a tile
+        //TODO: draw dat tile!
         return false;
     }
 

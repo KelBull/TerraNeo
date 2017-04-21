@@ -155,4 +155,9 @@ public class GameBoard {
             super(s);
         }
     }
+
+    public int getPlayerCount()
+    {
+        return numPlayers;
+    }
 }

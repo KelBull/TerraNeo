@@ -2,7 +2,27 @@ package kc.terraneo;
 
 import android.graphics.Color;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import kc.terraneo.upgrades.Chaos;
+import kc.terraneo.upgrades.Cities;
+import kc.terraneo.upgrades.Crime;
+import kc.terraneo.upgrades.Death;
+import kc.terraneo.upgrades.Destruction;
+import kc.terraneo.upgrades.Dreams;
+import kc.terraneo.upgrades.Exploration;
+import kc.terraneo.upgrades.Games;
+import kc.terraneo.upgrades.Harvests;
+import kc.terraneo.upgrades.Invention;
+import kc.terraneo.upgrades.Knowledge;
+import kc.terraneo.upgrades.Magic;
+import kc.terraneo.upgrades.Medicine;
+import kc.terraneo.upgrades.Music;
+import kc.terraneo.upgrades.Plague;
+import kc.terraneo.upgrades.Time;
+import kc.terraneo.upgrades.War;
+import kc.terraneo.upgrades.Wealth;
 
 /**
  * Created by Kelsey on 1/20/2017.
@@ -16,10 +36,13 @@ class God {
     private int nativeLand1;
     private int nativeLand2;
     private int upgradeCount;
+    private int maxActionCount;
     private String name;
     private ArrayList<Temple> temples;
+    private ArrayList<Upgrade> upgrades;
     private final static String[] godNames = {"fskt","shaelys","pundr","lomhae","tkyrll","zolack"};
     private int templeCount;
+    private Action lastActionTaken;
     private boolean hasCrime;
     private boolean hasMagic;
     private boolean hasDeath;
@@ -76,6 +99,7 @@ class God {
                 break;
         }
         artPath = name + ".png";
+        maxActionCount = 4;
         upgradeCount = 0;
         hasCrime= false;
         hasMagic= false;
@@ -97,6 +121,7 @@ class God {
         hasMedicine = false;
         temples = new ArrayList<Temple>();
         templeCount = 4;
+        upgrades = new ArrayList<Upgrade>();
     }
 
     public void setOwner(Player p)
@@ -131,12 +156,29 @@ class God {
         return upgradeCount;
     }
 
+    public int getMaxActionCount(){return maxActionCount;}
+
+    /**
+     *
+     * @param a the last action taken by the god. Null at the start of the turn
+     */
+    public void setLastActionTaken(Action a)
+    {
+        lastActionTaken = a;
+    }
+
+    public Action getLastActionTaken()
+    {
+        return lastActionTaken;
+    }
+
     public boolean hasCrime() {
         return hasCrime;
     }
     public void giveCrime(){
         hasCrime = true;
         upgradeCount++;
+        upgrades.add(new Crime());
     }
 
     public boolean hasMagic() {
@@ -145,6 +187,7 @@ class God {
     public void giveMagic(){
         hasMagic = true;
         upgradeCount++;
+        upgrades.add(new Magic());
     }
 
     public boolean hasDeath() {
@@ -153,6 +196,7 @@ class God {
     public void giveDeath(){
         hasDeath = true;
         upgradeCount++;
+        upgrades.add(new Death());
     }
 
     public boolean hasKnowledge() {
@@ -161,6 +205,7 @@ class God {
     public void giveKnowledge(){
         hasKnowledge = true;
         upgradeCount++;
+        upgrades.add(new Knowledge());
     }
 
     public boolean hasChaos() {
@@ -169,6 +214,7 @@ class God {
     public void giveChaos(){
         hasChaos = true;
         upgradeCount++;
+        upgrades.add(new Chaos());
     }
 
     public boolean hasDestruction() {
@@ -177,6 +223,7 @@ class God {
     public void giveDestruction(){
         hasDestruction = true;
         upgradeCount++;
+        upgrades.add(new Destruction());
     }
 
 
@@ -186,6 +233,7 @@ class God {
     public void giveInvention(){
         hasInvention = true;
         upgradeCount++;
+        upgrades.add(new Invention());
     }
 
     public boolean hasHarvests() {
@@ -194,6 +242,7 @@ class God {
     public void giveHarvests(){
         hasHarvests = true;
         upgradeCount++;
+        upgrades.add(new Harvests());
     }
 
     public boolean hasMusic() {
@@ -202,6 +251,8 @@ class God {
     public void giveMusic(){
         hasMusic = true;
         upgradeCount++;
+
+        upgrades.add(new Music());
     }
 
     public boolean hasWar() {
@@ -210,6 +261,7 @@ class God {
     public void giveWar(){
         hasWar = true;
         upgradeCount++;
+        upgrades.add(new War());
     }
 
     public boolean hasPlague() {
@@ -218,6 +270,7 @@ class God {
     public void givePlague(){
         hasPlague = true;
         upgradeCount++;
+        upgrades.add(new Plague());
     }
 
     public boolean hasGames() {
@@ -226,6 +279,7 @@ class God {
     public void giveGames(){
         hasGames = true;
         upgradeCount++;
+        upgrades.add(new Games());
     }
 
     public boolean hasCities() {
@@ -239,6 +293,8 @@ class God {
         hasCities = true;
         upgradeCount++;
         temples.add(new Temple(owner, new OffBoardPosition()));
+        templeCount++;
+        upgrades.add(new Cities());
     }
 
     public int getTempleCount()
@@ -249,6 +305,7 @@ class God {
     public void placeTemple()
     {
         templeCount--;
+        temples.remove(templeCount);
     }
 
     public boolean hasTime() {
@@ -257,6 +314,7 @@ class God {
     public void giveTime(){
         hasTime = true;
         upgradeCount++;
+        upgrades.add(new Time());
     }
 
     public boolean hasExploration() {
@@ -265,6 +323,7 @@ class God {
     public void giveExploration(){
         hasExploration = true;
         upgradeCount++;
+        upgrades.add(new Exploration());
     }
 
     public boolean hasDreams() {
@@ -273,6 +332,7 @@ class God {
     public void giveDreams(){
         hasDreams = true;
         upgradeCount++;
+        upgrades.add(new Dreams());
     }
 
     public boolean hasWealth() {
@@ -281,6 +341,8 @@ class God {
     public void giveWealth(){
         hasWealth = true;
         upgradeCount++;
+
+        upgrades.add(new Wealth());
     }
 
     public boolean hasMedicine() {
@@ -289,6 +351,8 @@ class God {
     public void giveMedicine(){
         hasMedicine = true;
         upgradeCount++;
+
+        upgrades.add(new Medicine());
     }
 
     public ArrayList<Temple> getTemples()
