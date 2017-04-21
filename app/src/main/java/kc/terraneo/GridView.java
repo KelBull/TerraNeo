@@ -31,8 +31,9 @@ public class GridView extends View implements View.OnTouchListener {
     public static final float S = (float) Math.sqrt(3); //square root of 3
     float topMargin;
     float leftMargin;
-    int Count =4;
+    int Count = 4;
 
+    //int playerCount = SetPlayerCount.pCount();
 
     public GridView(Activity context, GameBoard board) {
         super(context);

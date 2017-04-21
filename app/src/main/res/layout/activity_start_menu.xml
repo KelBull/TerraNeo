@@ -16,13 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/New_Game"
-        android:layout_above="@+id/Tutorial"
-        android:layout_centerHorizontal="true" />
-    <Button
-        android:text="Tutorial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Tutorial"
         android:layout_above="@+id/Quit"
         android:layout_centerHorizontal="true" />
 
@@ -32,5 +25,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/Quit"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp" />
 </RelativeLayout>

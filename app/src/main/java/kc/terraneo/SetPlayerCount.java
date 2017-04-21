@@ -11,7 +11,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class SetPlayerCount extends AppCompatActivity {
-    private int playerCount;
+    public int playerCount;
     TableLayout layout;
     TextView label;
     EditText typer;
@@ -19,6 +19,10 @@ public class SetPlayerCount extends AppCompatActivity {
     final int minPlayers = 2;
     final int maxPlayers = 6;
     Intent returnIntent;
+
+    public int pCount(){
+        return playerCount;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

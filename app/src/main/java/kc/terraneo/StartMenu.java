@@ -35,8 +35,15 @@ public class StartMenu extends AppCompatActivity {
                 Log.i("clicks", "you have clicked New Game");
             }
         });
+        Button Quit = (Button) findViewById(R.id.Quit);
+        Quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
+            }
+        });
     }
-
     public void start()
     {
         startActivity(intent);
