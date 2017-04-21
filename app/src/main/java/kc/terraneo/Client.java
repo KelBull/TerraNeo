@@ -23,7 +23,7 @@ public class Client extends AppCompatActivity {
      //commenting this out for an experiment to shift the launch order so as to dynamically assign
      //player count
         Bundle bundle = getIntent().getExtras();
-        int playerCount = bundle.getInt("playerCount");
+        int playerCount = bundle.getInt("playerCount", 4);
         GameBoard board = new GameBoard(playerCount);
         ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
         V.addView(new GridView(this, board));
