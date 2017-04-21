@@ -20,20 +20,11 @@ public class Client extends AppCompatActivity {
 
 
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
-
      //commenting this out for an experiment to shift the launch order so as to dynamically assign
      //player count
-
-     GameBoard board = new GameBoard(4);
+        Bundle bundle = getIntent().getExtras();
+        int playerCount = bundle.getInt("playerCount");
+        GameBoard board = new GameBoard(playerCount);
         ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
         V.addView(new GridView(this, board));
        // Intent intent = new Intent(this, SetPlayerCount.class);

@@ -29,6 +29,7 @@ public class ChooseGod extends AppCompatActivity {
         setContentView(R.layout.activity_choose_god);
         layout = (TableLayout) findViewById(R.id.TableLayout);
         godList = new ArrayList<>();
+
         for(int i=0; i<God.getGodNames().length; i++)
         {
             godList.add(God.getGodNames()[i]);

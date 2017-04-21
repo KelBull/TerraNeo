@@ -24,25 +24,24 @@ public class GridView extends View implements View.OnTouchListener {
 
     private RelativeLayout mRelativeLayout;
     private Activity activity;
-    private GameBoard boardSize;
+    private GameBoard gameBoard;
     private Paint rowPaint;
     int hexSize = 50;
     private float r;
     public static final float S = (float) Math.sqrt(3); //square root of 3
     float topMargin;
     float leftMargin;
-    int Count = 4;
+    int radius;
 
-    //int playerCount = SetPlayerCount.pCount();
 
     public GridView(Activity context, GameBoard board) {
         super(context);
-        boardSize = board;
+        gameBoard = board;
         rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
         activity = context;
-
+        radius = gameBoard.getRadius();
         setOnTouchListener(this);
     }
 
@@ -51,10 +50,9 @@ public class GridView extends View implements View.OnTouchListener {
     }
 
 
-    public Tile ChooseTile(GameBoard board, float x, float y){ //select a tile that has already been played
+    public Tile ChooseTile(float x, float y){ //select a tile that has already been played
         float edgeX = x - r;
         float edgeY = y + (S / 2) * r;
-        int radius = Count;
         int column;
         int row;
 
@@ -71,7 +69,7 @@ public class GridView extends View implements View.OnTouchListener {
             }
         }
         Log.i ("terraneo", "found " + x + "," + y + " at " + column + "," + row);
-        return null;
+        return gameBoard.getTileAt(column, row);
     }
 
     private void drawHex(Canvas canvas, int x, int y) { //draws a hex
@@ -309,7 +307,8 @@ public class GridView extends View implements View.OnTouchListener {
         }
         return last;
     }
-    private void drawTile(Canvas canvas, int row, int column, Drawable image){
+    private void drawTile(Canvas canvas, int row, int column, Drawable image)
+    {
         float cy;
         float cx = computeCenterX(column);
         cy = computeCenterY(column, row);
@@ -319,23 +318,23 @@ public class GridView extends View implements View.OnTouchListener {
        // image.setBounds(350,150,500,300);
         image.draw(canvas);
     }
-        @Override
-        public  boolean onTouch (View view, MotionEvent event){
+    @Override
+    public  boolean onTouch (View view, MotionEvent event){
             switch (event.getAction()){
                 case MotionEvent.ACTION_DOWN:
-                    ChooseTile (null, event.getX(), event.getY());
+                    ChooseTile (event.getX(), event.getY());
                     break;
             }
             return false;
         }
         @Override
-        protected void onDraw (Canvas canvas){ //draws the grid\
+     protected void onDraw (Canvas canvas)
+     { //draws the grid\
 
             super.onDraw(canvas);
             canvas.drawColor(0xff000000); //set the color of the background
             float h = getHeight()-30; //gets the height of the screen
             float w = getWidth()-30; //gets the width of the screen
-            int radius = Count;
             int numTiles = radius * 2 + 1;
 
             float maxWidth = w / (1.5f * numTiles);
@@ -355,7 +354,7 @@ public class GridView extends View implements View.OnTouchListener {
             }
             Drawable tileimage = activity.getResources().getDrawable(R.drawable.empty_hex);
             drawTile(canvas, radius, radius, tileimage);
-        }
+      }
 }
 
 

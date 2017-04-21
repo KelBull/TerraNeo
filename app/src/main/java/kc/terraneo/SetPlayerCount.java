@@ -44,9 +44,13 @@ public class SetPlayerCount extends AppCompatActivity {
         try
         {
             playerCount = (Integer.valueOf(typer.getText().toString())).intValue();
+            if(playerCount < minPlayers || playerCount > maxPlayers)
+            {
+                return;
+            }
             Log.i("done clicked","playerCount got: "+String.valueOf(playerCount));
             returnIntent = new Intent(this, Client.class);
-            returnIntent.putExtra("player count", playerCount);
+            returnIntent.putExtra("playerCount", playerCount);
             startActivity(returnIntent);
         }catch(Exception e)
         {
