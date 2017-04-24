@@ -1,13 +1,22 @@
 package kc.terraneo;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 
 public class Client extends AppCompatActivity {
+    private GameWindow gameWindow;
+    private int playerCount;
+    private GameBoard board;
+    private Player currentPlayer;
+    private int currentPlayerNum;
+    private int actionCount;
+    private int remainingTurns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,19 +27,17 @@ public class Client extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
 
-
-     //commenting this out for an experiment to shift the launch order so as to dynamically assign
-     //player count
         Bundle bundle = getIntent().getExtras();
-        int playerCount = bundle.getInt("playerCount", 4);
-        GameBoard board = new GameBoard(playerCount);
-        GridView grid = (GridView) findViewById(R.id.grid);
-        grid.setBoard(board);
-       // ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
-       // V.addView(new GridView(this, board));
-       // Intent intent = new Intent(this, SetPlayerCount.class);
-      //  intent.setFlags(0);
-       // startActivity(intent);
+        playerCount = bundle.getInt("playerCount", 4);
+        board = new GameBoard(playerCount);
+        gameWindow = new GameWindow(board);
+        currentPlayer = gameWindow.getPlayers().get(0);
+        currentPlayerNum = 0;
+        actionCount = 0;
+        remainingTurns = Integer.MAX_VALUE;
+
+        ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
+        V.addView(new GridView(this, board, gameWindow));
     }
 
     @Override
@@ -53,4 +60,47 @@ public class Client extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void passTurn()
+    {
+        if(remainingTurns==0)
+        {
+            Intent intent = new Intent(this, EndGame.class);
+            for(Player p: gameWindow.getPlayers())
+            {
+                intent.putExtra(p.getName(), p.getScore());
+            }
+            startActivity(intent);
+        }
+        if(doesGameEnd() && remainingTurns > playerCount)
+        {
+            remainingTurns = playerCount;
+        }
+        currentPlayerNum++;
+        if(currentPlayerNum == gameWindow.getPlayers().size())
+        {
+            currentPlayerNum = 0;
+        }
+        currentPlayer = gameWindow.getPlayers().get(currentPlayerNum);
+
+        remainingTurns--;
+        startTurn(currentPlayer);
+    }
+
+    public void startTurn(Player p)
+    {
+        actionCount = 0;
+        p.getGod().setLastActionTaken(null);
+
+        //TODO: change the UI so that the current player's god is centered. highlight their pawn.
+    }
+
+    public boolean doesGameEnd()
+    {
+        if(currentPlayer.getGod().getTempleCount()==0)
+            return true;
+        else
+            return false;
+    }
+
 }

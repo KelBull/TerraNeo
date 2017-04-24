@@ -4,12 +4,10 @@ package kc.terraneo;
  */
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -27,6 +25,7 @@ public class GridView extends View implements View.OnTouchListener {
     private RelativeLayout mRelativeLayout;
     private Activity activity;
     private GameBoard gameBoard;
+    private GameWindow gameWindow;
     private Paint rowPaint;
     int hexSize = 50;
     private float r;
@@ -34,11 +33,14 @@ public class GridView extends View implements View.OnTouchListener {
     float topMargin;
     float leftMargin;
     int radius;
+    Client parent;
 
 
-    public GridView(Activity context, GameBoard board) {
+    public GridView(Client context, GameBoard board, GameWindow window) {
         super(context);
+        parent = context;
         gameBoard = board;
+        gameWindow = window;
         rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
@@ -47,20 +49,9 @@ public class GridView extends View implements View.OnTouchListener {
         setOnTouchListener(this);
     }
 
-    public GridView(Context context, AttributeSet atters) {
-        super(context, atters);
-        rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        rowPaint.setColor(0xffff0000); // sets the color of the grid
-        rowPaint.setStrokeWidth(2); // sets line width of the grid
-        activity = (Activity) context;
-        setOnTouchListener(this);
-    }
-
-    public void setBoard (GameBoard board){
-        gameBoard = board;
-        radius = gameBoard.getRadius();
-    }
-    public boolean AddTile(Tile tile, float x, float y){ //move a tile
+    public boolean AddTile(Tile tile, float x, float y)
+    { //move a tile
+        //TODO: draw dat tile!
         return false;
     }
 

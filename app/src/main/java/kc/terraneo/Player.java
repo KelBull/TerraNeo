@@ -13,9 +13,11 @@ public class Player {
     private Pawn myPawn;
     private int myColor;
     private int score;
+    private String name;
 
-    public Player(God g)
+    public Player(String _name ,God g)
     {
+        name = _name;
         myGod = g;
         myGod.setOwner(this);
         myPawn = new Pawn(g.getColor(), this);
@@ -50,5 +52,10 @@ public class Player {
         {
             score += t.getScore();
         }
+    }
+
+    public String getName()
+    {
+        return name;
     }
 }
