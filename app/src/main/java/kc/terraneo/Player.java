@@ -14,11 +14,13 @@ public class Player {
     private int myColor;
     private int score;
     private String name;
+    private GameBoard board;
 
-    public Player(String _name ,God g)
+    public Player(String _name ,God g, GameBoard gb)
     {
         name = _name;
         myGod = g;
+        board = gb;
         myGod.setOwner(this);
         myPawn = new Pawn(g.getColor(), this);
         myColor = g.getColor();
@@ -58,4 +60,6 @@ public class Player {
     {
         return name;
     }
+
+    public GameBoard getBoard(){ return board;}
 }

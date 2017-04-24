@@ -53,14 +53,16 @@ public class GameWindow{
     //God[] remainingGods;
 
 
-    public GameWindow(GameBoard gB) {
-
-        playerCount = gB.getPlayerCount();
+    public GameWindow(GameBoard gB)
+    {
+        gBoard = gB;
+        playerCount = gBoard.getPlayerCount();
         String godName;
+        players = new ArrayList<Player>();
         for(int i=0; i< playerCount; i++)
         {
             godName = God.getGodNames()[i];
-            players.add(new Player("Player"+i, new God(godName)));
+            players.add(new Player("Player"+i, new God(godName), gBoard));
         }
 
        /* remainingGods  = new God[6];
@@ -167,10 +169,10 @@ public class GameWindow{
         {
             for(int j = 1; j<4; j++)
             {
-                masterTileList.add(new Tile(j, Color.RED, new OffBoardPosition()));
-                masterTileList.add(new Tile(j, Color.GREEN, new OffBoardPosition()));
-                masterTileList.add(new Tile(j, Color.YELLOW, new OffBoardPosition()));
-                masterTileList.add(new Tile(j, Color.BLUE, new OffBoardPosition()));
+                masterTileList.add(new Tile(gBoard, j, Color.RED, new OffBoardPosition()));
+                masterTileList.add(new Tile(gBoard, j, Color.GREEN, new OffBoardPosition()));
+                masterTileList.add(new Tile(gBoard, j, Color.YELLOW, new OffBoardPosition()));
+                masterTileList.add(new Tile(gBoard, j, Color.BLUE, new OffBoardPosition()));
             }
         }
 

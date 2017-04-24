@@ -16,7 +16,9 @@ public class GameBoard {
      * @param _numPlayers the number of players in the game, between 2 and 6 inclusive
      * @throws IllegalPlayerCountException if there aren't a legal number of players
      */
-    public GameBoard(int _numPlayers) {
+    public GameBoard(int _numPlayers)
+    {
+        numPlayers = _numPlayers;
         switch(_numPlayers){
             case 2: radius = 3;
                 break;

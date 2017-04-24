@@ -16,9 +16,10 @@ class Pawn extends BoardObject {
 
     public Pawn(int playerColor, Player _owner)
     {
+        owner = _owner;
+        theBoard = owner.getBoard();
         location = theBoard.getSourceTile().getLocation();
         color = playerColor;
-        owner = _owner;
     }
 
     /**
