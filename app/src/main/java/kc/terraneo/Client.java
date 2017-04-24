@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 
 public class Client extends AppCompatActivity {
@@ -25,8 +24,10 @@ public class Client extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         int playerCount = bundle.getInt("playerCount", 4);
         GameBoard board = new GameBoard(playerCount);
-        ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
-        V.addView(new GridView(this, board));
+        GridView grid = (GridView) findViewById(R.id.grid);
+        grid.setBoard(board);
+       // ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
+       // V.addView(new GridView(this, board));
        // Intent intent = new Intent(this, SetPlayerCount.class);
       //  intent.setFlags(0);
        // startActivity(intent);

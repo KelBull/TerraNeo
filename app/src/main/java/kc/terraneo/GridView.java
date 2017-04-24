@@ -4,10 +4,12 @@ package kc.terraneo;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -45,6 +47,19 @@ public class GridView extends View implements View.OnTouchListener {
         setOnTouchListener(this);
     }
 
+    public GridView(Context context, AttributeSet atters) {
+        super(context, atters);
+        rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        rowPaint.setColor(0xffff0000); // sets the color of the grid
+        rowPaint.setStrokeWidth(2); // sets line width of the grid
+        activity = (Activity) context;
+        setOnTouchListener(this);
+    }
+
+    public void setBoard (GameBoard board){
+        gameBoard = board;
+        radius = gameBoard.getRadius();
+    }
     public boolean AddTile(Tile tile, float x, float y){ //move a tile
         return false;
     }
