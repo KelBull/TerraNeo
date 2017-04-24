@@ -19,6 +19,7 @@ class Temple extends BoardObject {
         location = loc;
         color = _owner.getColor();
         owner = _owner;
+        theBoard = owner.getBoard();
         g = _owner.getGod();
         updateScore();
     }

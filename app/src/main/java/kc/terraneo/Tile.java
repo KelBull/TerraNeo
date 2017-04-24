@@ -29,8 +29,9 @@ class Tile extends BoardObject {
      * @param _color the color of the tile
      * @param p the position on the gameboard
      */
-    public Tile(int _resonance, int _color, Position p)
+    public Tile(GameBoard gB, int _resonance, int _color, Position p)
     {
+        theBoard = gB;
         hasPlayer = false;
         hasTemple = false;
         isSiphoned = false;
