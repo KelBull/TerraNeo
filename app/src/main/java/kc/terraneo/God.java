@@ -42,7 +42,6 @@ class God {
     private ArrayList<Upgrade> upgrades;
     private final static String[] godNames = {"fskt","shaelys","pundr","lomhae","tkyrll","zolack"};
     private int templeCount;
-    private Action lastActionTaken;
     private boolean hasCrime;
     private boolean hasMagic;
     private boolean hasDeath;
@@ -158,19 +157,7 @@ class God {
 
     public int getMaxActionCount(){return maxActionCount;}
 
-    /**
-     *
-     * @param a the last action taken by the god. Null at the start of the turn
-     */
-    public void setLastActionTaken(Action a)
-    {
-        lastActionTaken = a;
-    }
 
-    public Action getLastActionTaken()
-    {
-        return lastActionTaken;
-    }
 
     public boolean hasCrime() {
         return hasCrime;

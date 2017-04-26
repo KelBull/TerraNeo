@@ -36,18 +36,18 @@ import kc.terraneo.upgrades.War;
 import kc.terraneo.upgrades.Wealth;
 
 public class GameWindow{
-    GameBoard gBoard;
-    UpgradeSource uS1;
-    UpgradeSource uS2;
-    UpgradeSource uS3;
-    TileSource tS1;
-    TileSource tS2;
-    TileSource tS3;
-    TileSource tS4;
-    ArrayList<Tile> masterTileList;
-    ArrayList<Upgrade> masterUpgradeList;
-    ArrayList<Player> players;
-    Intent intent;
+    private GameBoard gBoard;
+    private UpgradeSource uS1;
+    private UpgradeSource uS2;
+    private UpgradeSource uS3;
+    private TileSource tS1;
+    private TileSource tS2;
+    private TileSource tS3;
+    private TileSource tS4;
+    private ArrayList<Tile> masterTileList;
+    private ArrayList<Upgrade> masterUpgradeList;
+    private ArrayList<Player> players;
+    private Intent intent;
     private int playerCount;
 
     //God[] remainingGods;
@@ -62,7 +62,7 @@ public class GameWindow{
         for(int i=0; i< playerCount; i++)
         {
             godName = God.getGodNames()[i];
-            players.add(new Player("Player"+i, new God(godName), gBoard));
+            players.add(new Player("Player"+i, new God(godName), gBoard, this));
         }
 
        /* remainingGods  = new God[6];
@@ -108,44 +108,6 @@ public class GameWindow{
         uS3 = new UpgradeSource(u3);
 
     }
-
-    /*
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super(requestCode, resultCode, data);
-        switch(resultCode){
-            case 10000:
-           // numPlayers = resultCode-999;
-                break;
-            case 10010:
-                players.add(new Player(remainingGods[0]));
-                remainingGods[0]=null;
-                break;
-            case 10011:
-                players.add(new Player(remainingGods[1]));
-                remainingGods[1]=null;
-                break;
-            case 10012:
-                players.add(new Player(remainingGods[2]));
-                remainingGods[2]=null;
-                break;
-            case 10013:
-                players.add(new Player(remainingGods[3]));
-                remainingGods[3]=null;
-                break;
-            case 10014:
-                players.add(new Player(remainingGods[4]));
-                remainingGods[4]=null;
-                break;
-            case 10015:
-                players.add(new Player(remainingGods[5]));
-                remainingGods[5]=null;
-                break;
-
-
-        }
-    }*/
-
     /**
      * starts the game client up for a new session. This should only ever be run once/game
      */
@@ -202,5 +164,31 @@ public class GameWindow{
         return players;
     }
 
+    public UpgradeSource getUpgradeSource1() {
+        return uS1;
+    }
+
+    public UpgradeSource getUpgradeSource2() {
+        return uS2;
+    }
+
+    public UpgradeSource getUpgradeSource3() {
+        return uS3;
+    }
+    public TileSource getTileSource1() {
+        return tS1;
+    }
+
+    public TileSource getTileSource2() {
+        return tS2;
+    }
+
+    public TileSource getTileSource3() {
+        return tS3;
+    }
+
+    public TileSource getTileSource4() {
+        return tS4;
+    }
 
 }

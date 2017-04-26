@@ -16,6 +16,7 @@ public class Client extends AppCompatActivity {
     private int currentPlayerNum;
     private int actionCount;
     private int remainingTurns;
+    private boolean isRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +35,14 @@ public class Client extends AppCompatActivity {
         currentPlayer = gameWindow.getPlayers().get(0);
         currentPlayerNum = 0;
         actionCount = 0;
+
         remainingTurns = Integer.MAX_VALUE;
         GridView grid = (GridView) findViewById(R.id.grid);
         grid.setBoard(board);
         grid.setWindow(gameWindow);
 
+        isRunning = true;
+        startTurn(currentPlayer);
        //ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
        //V.addView(new GridView(this, board, gameWindow));
     }
@@ -64,7 +68,18 @@ public class Client extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void passTurn()
+    /**
+     * runs the game
+     * I don't actually know if we need this or not
+    private void runGame()
+    {
+        while(isRunning)
+        {
+            startTurn(currentPlayer);
+        }
+    }*/
+
+    private void passTurn()
     {
         if(remainingTurns==0)
         {
@@ -90,15 +105,15 @@ public class Client extends AppCompatActivity {
         startTurn(currentPlayer);
     }
 
-    public void startTurn(Player p)
+    private void startTurn(Player p)
     {
         actionCount = 0;
-        p.getGod().setLastActionTaken(null);
+        p.setLastActionTaken(null);
 
         //TODO: change the UI so that the current player's god is centered. highlight their pawn.
     }
 
-    public boolean doesGameEnd()
+    private boolean doesGameEnd()
     {
         if(currentPlayer.getGod().getTempleCount()==0)
             return true;

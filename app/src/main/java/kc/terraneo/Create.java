@@ -23,8 +23,15 @@ public class Create extends MinorAction {
     }
 
 
-    public static boolean isValid(Tile _target, Position _p, Pawn _owner)
+    /**
+     *
+     * @param _p the position on the board where a tile would be placed
+     * @param _owner the pawn that would be placing the tile
+     * @return
+     */
+    public static boolean isValid( Position _p, Pawn _owner)
     {
+        Tile _target = _owner.getBoard().getTileAt(_p);
         if(_owner.isInRange(_target) && _owner.getBoard().getTileAt(_p).isEmptyTile())
         {
             return true;
