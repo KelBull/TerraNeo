@@ -16,8 +16,8 @@ import kc.terraneo.R;
 
 public class EndGame extends AppCompatActivity {
 
-    TableLayout layout;
-    TextView finalScore;
+    private TableLayout layout;
+    private TextView finalScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,6 +9,7 @@ public class GameBoard {
     private int radius;
     private int gridSide;
     private Tile[][] tiles;
+    private int scaledSize;
 
 
     /**
@@ -35,7 +36,7 @@ public class GameBoard {
         }
         gridSide = 2*radius+1;
         tiles = new Tile[gridSide][gridSide];
-
+        scaledSize = 0;
         for(int i=0; i< gridSide; i++)
         {
             for(int j=0; j<gridSide; j++)
@@ -161,5 +162,15 @@ public class GameBoard {
     public int getPlayerCount()
     {
         return numPlayers;
+    }
+    
+    public void setScaledSize(int r)
+    {
+        scaledSize = r;
+    }
+
+    public int getScaledSize()
+    {
+        return scaledSize;
     }
 }
