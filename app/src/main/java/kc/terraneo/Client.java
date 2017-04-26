@@ -34,6 +34,9 @@ public class Client extends AppCompatActivity {
         currentPlayerNum = 0;
         actionCount = 0;
         remainingTurns = Integer.MAX_VALUE;
+        GridView grid = (GridView) findViewById(R.id.grid);
+        grid.setBoard(board);
+        grid.setWindow(gameWindow);
 
        //ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
        //V.addView(new GridView(this, board, gameWindow));

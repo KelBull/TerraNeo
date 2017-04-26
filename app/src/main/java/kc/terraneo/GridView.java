@@ -371,7 +371,7 @@ public class GridView extends View implements View.OnTouchListener {
             leftMargin = (getWidth()-(r*numTiles*1.5f))/2;
             topMargin = ((getHeight()-(r*numTiles*S))/2)-25;
 
-//            Log.i("neo gen", "drawing grid with r="+r);
+          Log.i("neo gen", "drawing grid with r="+r + " w =" +w +" h=" +h);
 
             for (int row = 0; row < numTiles; row++) {
                 for (int column = firstColumn(row, radius); column <= lastColumn(row, radius); column++) {
