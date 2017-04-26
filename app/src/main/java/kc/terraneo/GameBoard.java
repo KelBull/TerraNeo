@@ -163,7 +163,7 @@ public class GameBoard {
     {
         return numPlayers;
     }
-    
+
     public void setScaledSize(int r)
     {
         scaledSize = r;
