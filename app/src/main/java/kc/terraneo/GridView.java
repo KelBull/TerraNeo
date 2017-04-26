@@ -29,13 +29,14 @@ public class GridView extends View implements View.OnTouchListener {
     private GameBoard gameBoard;
     private GameWindow gameWindow;
     private Paint rowPaint;
+    private Client parent;
     int hexSize = 50;
     private float r;
     public static final float S = (float) Math.sqrt(3); //square root of 3
     float topMargin;
     float leftMargin;
     int radius;
-    Client parent;
+
 
 
     public GridView(Client context, GameBoard board, GameWindow window) {
