@@ -2,8 +2,11 @@ package kc.terraneo;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 
 /**
@@ -43,7 +46,7 @@ public class TileView extends View  {
     }
 
     private void drawHex(Canvas canvas, int x, int y) { //draws a hex
-        float cy = (x);
+        float cy = (y);
         float cx = (x);
         int r=1;
 
@@ -71,6 +74,18 @@ public class TileView extends View  {
         Log.i("neo gen", "drawing hex " + x + "," + y + " centered at " + cx + "," + cy);
 //        Log.i("neo gen", "points: "+Ax+","+Ay+" "+Bx+","+By+" "+
 //                Cx+","+Cy+" "+Dx+","+Dy+" "+Ex+","+Ey+" "+Fx+","+Fy);
+    }
+
+    private void drawTile(Canvas canvas, int row, int column, Drawable image) {
+        int  r=1;
+        float cy;
+        float cx = column;
+        cy =  row;
+        float scale = 2 * (r/150);
+        Drawable scaled = new ScaleDrawable(image, Gravity.CENTER, scale, scale);
+        image.setBounds((int)(cx-r), (int)(cy-r*(S/2)), (int)(cx +r), (int)(cy+r*(S/2)));
+        // image.setBounds(350,150,500,300);
+        image.draw(canvas);
     }
 
     protected void onDraw (Canvas canvas){
