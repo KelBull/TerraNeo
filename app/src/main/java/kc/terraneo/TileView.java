@@ -7,10 +7,10 @@ import android.util.Log;
 import android.view.View;
 
 /**
- * Created by John&Jess on 4/26/2017.
+ * Created by John on 4/26/2017.
  */
 
-public class Tileview extends View  {
+public class TileView extends View  {
 
     private GameBoard gameBoard;
     private GameWindow gameWindow;
@@ -18,7 +18,7 @@ public class Tileview extends View  {
     private Client parent;
     public static final float S = (float) Math.sqrt(3); //square root of 3
 
-    public Tileview(Client context, GameBoard board, GameWindow window){
+    public TileView(Client context, GameBoard board, GameWindow window){
         super(context);
         parent = context;
         gameBoard = board;
@@ -27,12 +27,12 @@ public class Tileview extends View  {
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
     }
-    public Tileview(Client context,AttributeSet atters){
+    public TileView(Client context, AttributeSet atters){
         super(context, atters);
         rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
-        setOnTouchListener(this);
+       // setOnTouchListener(this);
     }
 
     public void setBoard (GameBoard board){
@@ -43,9 +43,9 @@ public class Tileview extends View  {
     }
 
     private void drawHex(Canvas canvas, int x, int y) { //draws a hex
-        float cy;
-        float cx = computeCenterX(x);
-        cy = computeCenterY(x, y);
+        float cy = (x);
+        float cx = (x);
+        int r=1;
 
         float By = cy - (S / 2) * r;
         float Ax = cx + r;
@@ -60,6 +60,8 @@ public class Tileview extends View  {
         float Fx = Bx;
         float Fy = Ey;
 
+
+
         canvas.drawLine(Ax, Ay, Bx, By, rowPaint); //Point A to B
         canvas.drawLine(Bx, By, Cx, Cy, rowPaint); //Point B to C
         canvas.drawLine(Cx, Cy, Dx, Ay, rowPaint); //Point C to D
@@ -70,6 +72,7 @@ public class Tileview extends View  {
 //        Log.i("neo gen", "points: "+Ax+","+Ay+" "+Bx+","+By+" "+
 //                Cx+","+Cy+" "+Dx+","+Dy+" "+Ex+","+Ey+" "+Fx+","+Fy);
     }
+
     protected void onDraw (Canvas canvas){
 
         super.onDraw(canvas);
