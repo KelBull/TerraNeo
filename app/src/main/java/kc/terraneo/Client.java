@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 
 public class Client extends AppCompatActivity {
@@ -36,8 +35,8 @@ public class Client extends AppCompatActivity {
         actionCount = 0;
         remainingTurns = Integer.MAX_VALUE;
 
-        ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
-        V.addView(new GridView(this, board, gameWindow));
+       //ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
+       //V.addView(new GridView(this, board, gameWindow));
     }
 
     @Override
