@@ -1,8 +1,5 @@
 package kc.terraneo;
 
-import android.graphics.Color;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +27,6 @@ public class Player {
         myColor = g.getColor();
         window = gw;
         updateScore();
-        updateLegalActions();
     }
 
     public God getGod()

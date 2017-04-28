@@ -62,7 +62,7 @@ public class Client extends AppCompatActivity {
         //upgrade.setWindow(gameWindow);
 
         isRunning = true;
-        startTurn(currentPlayer);
+        //startTurn(currentPlayer);
        //ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
        //V.addView(new GridView(this, board, gameWindow));
     }
@@ -129,6 +129,7 @@ public class Client extends AppCompatActivity {
     {
         actionCount = 0;
         p.setLastActionTaken(null);
+        p.updateLegalActions();
 
         //TODO: change the UI so that the current player's god is centered. highlight their pawn.
     }

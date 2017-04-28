@@ -1,5 +1,6 @@
 package kc.terraneo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -18,6 +19,7 @@ public class TileView extends View  {
 
     private GameBoard gameBoard;
     private GameWindow gameWindow;
+    private Activity activity;
     private Paint rowPaint;
     private Client parent;
     public static final float S = (float) Math.sqrt(3); //square root of 3
@@ -92,7 +94,8 @@ public class TileView extends View  {
         super.onDraw(canvas);
         canvas.drawColor(0xff000000); //set the color of the background
 
-        Drawable tileimage = parent.getResources().getDrawable(R.drawable.empty_hex);
+       // drawHex(canvas, column, row);
+        Drawable tileimage = parent.getResources().getDrawable(R.drawable.violent_earth);
         drawTile(canvas, tileimage);
 
     }
