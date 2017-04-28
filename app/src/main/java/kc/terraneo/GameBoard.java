@@ -10,6 +10,19 @@ public class GameBoard {
     private int gridSide;
     private Tile[][] tiles;
     private int scaledSize;
+    private float tileRadius = 30;
+    
+    public float getTileRadius() {
+        return tileRadius;
+    }
+
+    public void setTileRadius(float tileRadius) {
+        this.tileRadius = tileRadius;
+    }
+
+
+
+
 
 
     /**
