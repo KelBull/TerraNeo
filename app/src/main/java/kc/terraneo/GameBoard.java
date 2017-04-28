@@ -39,7 +39,6 @@ public class GameBoard {
                 break;
             case 6: radius = 5;
                 break;
-            //default: throw new IllegalPlayerCountException("Illegal player count "+ _numPlayers +" is not a legal player count");
 
         }
         gridSide = 2*radius+1;
@@ -52,11 +51,10 @@ public class GameBoard {
                 if(i != radius && j != radius)
                 {
                     tiles[i][j] = new EmptyTile(new Position(i,j));
-                }else{
-                    tiles[radius][radius] = new SourceTile();
                 }
             }
         }
+        tiles[radius][radius] = new SourceTile(radius);
     }
 
     /**
@@ -171,6 +169,8 @@ public class GameBoard {
     {
         return numPlayers;
     }
+
+    public int getGridSide(){return gridSide;}
 
     public void setScaledSize(int r)
     {

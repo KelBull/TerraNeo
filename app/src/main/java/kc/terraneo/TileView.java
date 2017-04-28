@@ -8,19 +8,22 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
  * Created by John on 4/26/2017.
  */
 
-public class TileView extends View  {
+public class TileView extends View implements View.OnTouchListener {
 
     private GameBoard gameBoard;
     private GameWindow gameWindow;
     private Activity activity;
     private Paint rowPaint;
     private Client parent;
+    private int identifier;
+    private Drawable tileImage;
     public static final float S = (float) Math.sqrt(3); //square root of 3
 
     public TileView(Client context, GameBoard board, GameWindow window){
@@ -47,6 +50,10 @@ public class TileView extends View  {
     }
     public void setWindow (GameWindow window){
         gameWindow = window;
+    }
+    public void setIdentifier(int i)
+    {
+        identifier = i;
     }
 
     private void drawHex(Canvas canvas) { //draws a hex
@@ -96,9 +103,61 @@ public class TileView extends View  {
         canvas.drawColor(0xff000000); //set the color of the background
 
         drawHex(canvas);
-        Drawable tileimage = activity.getResources().getDrawable(R.drawable.violent_earth);
-        drawTile(canvas, tileimage);
+        //tileImage = activity.getResources().getDrawable(R.drawable.violent_earth);
+        Tile t;
+        switch(identifier)
+        {
+            case 1: t = gameWindow.getTileSource1().peek();
+                break;
+            case 2: t = gameWindow.getTileSource2().peek();
+                break;
+            case 3: t = gameWindow.getTileSource3().peek();
+                break;
+            case 4: t = gameWindow.getTileSource4().peek();
+                break;
+            default: t= new EmptyTile(new OffBoardPosition());
+        }
+        String path = t.getArtPath();
+        switch(path)
+        {
+            case "violent_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_earth);
+                break;
+            case "agitated_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_earth);
+                break;
+            case "calm_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_earth);
+                break;
+            case "violent_wind.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_wind);
+                break;
+            case "agitated_wind.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_wind);
+                break;
+            case "calm_wind.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_wind);
+                break;
+            case "violent_fire.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_fire);
+                break;
+            case "agitated_fire.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_fire);
+                break;
+            case "calm_fire.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_fire);
+                break;
+            case "violent_water.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_water);
+                break;
+            case "agitated_water.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_water);
+                break;
+            case "calm_water.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_water);
+                break;
+            default: tileImage = activity.getResources().getDrawable(R.drawable.source_tile);
+        }
+        drawTile(canvas, tileImage);
 
     }
 
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            //This is where we do click and drag stuff!
+            //TODO: IMPLEMENT
+
+        }
+        return false;
+    }
 }

@@ -13,4 +13,13 @@ public class SourceTile extends Tile {
         artPath = "source_tile.png";
         isPassable = true;
     }
+
+    /**
+     *
+     * @param radius the radius of the GameBoard
+     */
+    public SourceTile(int radius)
+    {
+        location = new Position(radius, radius);
+    }
 }

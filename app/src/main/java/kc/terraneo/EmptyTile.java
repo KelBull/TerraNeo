@@ -9,7 +9,7 @@ public class EmptyTile extends Tile {
     public EmptyTile(Position p)
     {
         super();
-        position = p;
+        location = p;
         artPath = "black_tile.png";
     }
 

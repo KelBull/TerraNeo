@@ -27,6 +27,7 @@ public class Player {
         myColor = g.getColor();
         window = gw;
         updateScore();
+        legalActions = new ArrayList<Action>();
     }
 
     public God getGod()
@@ -62,32 +63,28 @@ public class Player {
     {
         return name;
     }
-
     public GameBoard getBoard(){ return board;}
-
     /**
-     *
      * @param a the last action taken by the god. Null at the start of the turn
      */
     public void setLastActionTaken(Action a)
     {
         lastActionTaken = a;
     }
-
     public Action getLastActionTaken()
     {
         return lastActionTaken;
     }
-
     public ArrayList<Action> getLegalActions() {return legalActions;}
 
     public void updateLegalActions()
     {
-        legalActions = null;
+        legalActions.clear();
         //add move actions
         for (Tile t: myPawn.getLegalMoves()) {
             legalActions.add(new Move(myPawn, t.getLocation()));
-        };
+        }
+
         Tile locT = board.getTileAt(myPawn.getLocation());
         //add create actions
         for (Tile t: locT.getNeighbors()) {

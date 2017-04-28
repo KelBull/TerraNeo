@@ -17,8 +17,8 @@ class Tile extends BoardObject {
     protected int color;
     private Temple t;
     protected boolean isPassable;
-    protected String artPath;
-    protected Position position;
+    //protected String artPath;
+    //protected Position position;
     public static String[] resonanceValues = {"empty","calm","agitated","violent"};
     protected ArrayList<Tile> neighbors = new ArrayList<Tile>();
 
@@ -46,7 +46,7 @@ class Tile extends BoardObject {
                 break;
             case Color.BLUE: artPath += "water";
                 break;
-            case Color.YELLOW: artPath += "air";
+            case Color.YELLOW: artPath += "wind";
                 break;
             case Color.GREEN: artPath += "earth";
                 break;
@@ -61,7 +61,7 @@ class Tile extends BoardObject {
         hasTemple = false;
         isSiphoned = false;
         isPassable = false;
-        position = new Position(0,0);
+        location = new Position(0,0);
         color = Color.BLACK;
         resonance = 0;
         artPath = "black_tile.png";

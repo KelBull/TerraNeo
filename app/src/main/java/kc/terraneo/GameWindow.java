@@ -65,14 +65,6 @@ public class GameWindow{
             players.add(new Player("Player"+i, new God(godName), gBoard, this));
         }
 
-       /* remainingGods  = new God[6];
-        remainingGods[0] = new God("fskt");
-        remainingGods[1] = new God("shaelys");
-        remainingGods[2] = new God("pundr");
-        remainingGods[3] = new God("lomhae");
-        remainingGods[4] = new God("tkyrll");
-        remainingGods[5] = new God("zolack");*/
-
         populateTileList();
         Collections.shuffle(masterTileList);
         Collections.shuffle(masterUpgradeList);

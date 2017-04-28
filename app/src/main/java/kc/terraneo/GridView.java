@@ -83,17 +83,26 @@ public class GridView extends View implements View.OnTouchListener {
         int column;
         int row;
 
-        for (column = 0; column < radius*2+1; column++){
+        for (column = 0; column < radius*2; column++){
             float cx = computeCenterX(column);
             if (edgeX < cx){
                 break;
             }
         }
-        for (row = 0; row< radius*2+1; row++){
+        for (row = 0; row< radius*2; row++){
             float cy = computeCenterY(column, row);
             if (edgeY > cy){
                 break;
             }
+        }
+        int maxSize = gameBoard.getGridSide();
+        if(column > maxSize)
+        {
+            column = maxSize-1;
+        }
+        if(row > maxSize)
+        {
+            row = maxSize-1;
         }
         Log.i ("terraneo", "found " + x + "," + y + " at " + column + "," + row);
         return gameBoard.getTileAt(column, row);
@@ -346,14 +355,15 @@ public class GridView extends View implements View.OnTouchListener {
         image.draw(canvas);
     }
     @Override
-    public  boolean onTouch (View view, MotionEvent event){
-            switch (event.getAction()){
-                case MotionEvent.ACTION_DOWN:
-                    ChooseTile (event.getX(), event.getY());
-                    break;
-            }
-            return false;
+    public boolean onTouch (View view, MotionEvent event)
+    {
+        switch (event.getAction()){
+               case MotionEvent.ACTION_DOWN:
+               ChooseTile (event.getX(), event.getY());
+                break;
         }
+        return false;
+    }
         @Override
      protected void onDraw (Canvas canvas)
      { //draws the grid\
@@ -380,8 +390,8 @@ public class GridView extends View implements View.OnTouchListener {
                     drawHex(canvas, column, row);
                 }
             }
-            Drawable tileimage = activity.getResources().getDrawable(R.drawable.empty_hex);
-         drawTile(canvas, radius, radius, tileimage);
+            Drawable tileImage = activity.getResources().getDrawable(R.drawable.empty_hex);
+         drawTile(canvas, radius, radius, tileImage);
       }
 }
 
