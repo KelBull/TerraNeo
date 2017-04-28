@@ -38,6 +38,8 @@ public class UpgradeView extends View {
         super.onDraw(canvas);
         canvas.drawColor(0xff000000); //set the color of the background
 
+        //Drawable tileimage = parent.getResources().getDrawable(R.drawable.empty_hex);
+
     }
 }
 

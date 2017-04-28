@@ -1,5 +1,6 @@
 package kc.terraneo;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -30,7 +31,7 @@ public class TileView extends View  {
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
     }
-    public TileView(Client context, AttributeSet atters){
+    public TileView(Context context, AttributeSet atters){
         super(context, atters);
         rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rowPaint.setColor(0xffff0000); // sets the color of the grid
@@ -48,7 +49,7 @@ public class TileView extends View  {
     private void drawHex(Canvas canvas, int x, int y) { //draws a hex
         float cy = (y);
         float cx = (x);
-        int r=1;
+        float r = gameBoard.getTileRadius();
 
         float By = cy - (S / 2) * r;
         float Ax = cx + r;
@@ -63,8 +64,6 @@ public class TileView extends View  {
         float Fx = Bx;
         float Fy = Ey;
 
-
-
         canvas.drawLine(Ax, Ay, Bx, By, rowPaint); //Point A to B
         canvas.drawLine(Bx, By, Cx, Cy, rowPaint); //Point B to C
         canvas.drawLine(Cx, Cy, Dx, Ay, rowPaint); //Point C to D
@@ -76,11 +75,11 @@ public class TileView extends View  {
 //                Cx+","+Cy+" "+Dx+","+Dy+" "+Ex+","+Ey+" "+Fx+","+Fy);
     }
 
-    private void drawTile(Canvas canvas, int row, int column, Drawable image) {
-        int  r=1;
-        float cy;
-        float cx = column;
-        cy =  row;
+    private void drawTile(Canvas canvas, Drawable image) {
+        float r = gameBoard.getTileRadius();
+        float cy = getHeight()/2;
+        float cx = getWidth()/2;
+
         float scale = 2 * (r/150);
         Drawable scaled = new ScaleDrawable(image, Gravity.CENTER, scale, scale);
         image.setBounds((int)(cx-r), (int)(cy-r*(S/2)), (int)(cx +r), (int)(cy+r*(S/2)));
@@ -92,6 +91,9 @@ public class TileView extends View  {
 
         super.onDraw(canvas);
         canvas.drawColor(0xff000000); //set the color of the background
+
+        Drawable tileimage = parent.getResources().getDrawable(R.drawable.empty_hex);
+        drawTile(canvas, tileimage);
 
     }
 

@@ -41,6 +41,26 @@ public class Client extends AppCompatActivity {
         grid.setBoard(board);
         grid.setWindow(gameWindow);
 
+        TileView tilePile = (TileView) findViewById(R.id.pileOne);
+        tilePile.setBoard(board);
+        tilePile.setWindow(gameWindow);
+
+        tilePile = (TileView) findViewById(R.id.pileTwo);
+        tilePile.setBoard(board);
+        tilePile.setWindow(gameWindow);
+
+        tilePile = (TileView) findViewById(R.id.pileThree);
+        tilePile.setBoard(board);
+        tilePile.setWindow(gameWindow);
+
+        tilePile = (TileView) findViewById(R.id.pileFour);
+        tilePile.setBoard(board);
+        tilePile.setWindow(gameWindow);
+
+        //UpgradeView upgrade = (UpgradeView) findViewById(R.id.grid);
+        //upgrade.setBoard(board);
+        //upgrade.setWindow(gameWindow);
+
         isRunning = true;
         startTurn(currentPlayer);
        //ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);

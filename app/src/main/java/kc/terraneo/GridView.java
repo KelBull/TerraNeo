@@ -368,6 +368,7 @@ public class GridView extends View implements View.OnTouchListener {
             float maxHeight = h / (S * numTiles);
 
             r = Math.min(maxWidth, maxHeight); //calculates the radius of each hex
+            gameBoard.setTileRadius(r);
 
             leftMargin = (getWidth()-(r*numTiles*1.5f))/2;
             topMargin = ((getHeight()-(r*numTiles*S))/2)-25;
@@ -380,7 +381,7 @@ public class GridView extends View implements View.OnTouchListener {
                 }
             }
             Drawable tileimage = activity.getResources().getDrawable(R.drawable.empty_hex);
-            drawTile(canvas, radius, radius, tileimage);
+         drawTile(canvas, radius, radius, tileimage);
       }
 }
 
