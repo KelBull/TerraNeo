@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -29,6 +28,7 @@ public class TileView extends View  {
         parent = context;
         gameBoard = board;
         gameWindow = window;
+        activity = context;
         rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
@@ -38,6 +38,7 @@ public class TileView extends View  {
         rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
+        activity = (Activity) context;
        // setOnTouchListener(this);
     }
 
@@ -48,9 +49,9 @@ public class TileView extends View  {
         gameWindow = window;
     }
 
-    private void drawHex(Canvas canvas, int x, int y) { //draws a hex
-        float cy = (y);
-        float cx = (x);
+    private void drawHex(Canvas canvas) { //draws a hex
+        float cy = getHeight()/2;
+        float cx = getWidth()/2;
         float r = gameBoard.getTileRadius();
 
         float By = cy - (S / 2) * r;
@@ -72,7 +73,7 @@ public class TileView extends View  {
         canvas.drawLine(Dx, Dy, Ex, Ey, rowPaint); //Point D to E
         canvas.drawLine(Ex, Ey, Fx, Fy, rowPaint); //Point E to F
         canvas.drawLine(Fx, Fy, Ax, Ay, rowPaint); //Point F to A
-        Log.i("neo gen", "drawing hex " + x + "," + y + " centered at " + cx + "," + cy);
+       // Log.i("neo gen", "drawing hex " + x + "," + y + " centered at " + cx + "," + cy);
 //        Log.i("neo gen", "points: "+Ax+","+Ay+" "+Bx+","+By+" "+
 //                Cx+","+Cy+" "+Dx+","+Dy+" "+Ex+","+Ey+" "+Fx+","+Fy);
     }
@@ -94,8 +95,8 @@ public class TileView extends View  {
         super.onDraw(canvas);
         canvas.drawColor(0xff000000); //set the color of the background
 
-       // drawHex(canvas, column, row);
-        Drawable tileimage = parent.getResources().getDrawable(R.drawable.violent_earth);
+        drawHex(canvas);
+        Drawable tileimage = activity.getResources().getDrawable(R.drawable.violent_earth);
         drawTile(canvas, tileimage);
 
     }
