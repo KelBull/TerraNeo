@@ -23,12 +23,12 @@
 
         <LinearLayout
             android:id="@+id/leftside"
-            android:layout_width="wrap_content"
+            android:layout_width="162dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/upgradeAndTiles"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -41,6 +41,11 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Upgrades" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -48,18 +53,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    tools:context="kc.terraneo.TileView">
+                    android:orientation="vertical">
 
                     <kc.terraneo.TileView
                         android:id="@+id/pileOne"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
                     <kc.terraneo.TileView
                         android:id="@+id/pileTwo"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                 </LinearLayout>
@@ -69,18 +73,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    tools:context="kc.terraneo.TileView">
+                    android:orientation="vertical">
 
                     <kc.terraneo.TileView
                         android:id="@+id/pileThree"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
                     <kc.terraneo.TileView
                         android:id="@+id/pileFour"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                 </LinearLayout>
@@ -90,8 +93,7 @@
             <View
                 android:id="@+id/currentPlayer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="108dp" />
         </LinearLayout>
 
         <kc.terraneo.GridView
@@ -100,6 +102,13 @@
             android:layout_height="match_parent"
             android:layout_weight="2.5" />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="61dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="AllPlayers" />
+
+    </LinearLayout>
 
 </FrameLayout>
