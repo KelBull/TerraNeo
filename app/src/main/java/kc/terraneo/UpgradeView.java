@@ -56,15 +56,14 @@ public class UpgradeView extends View {
     }
 
     private void drawUpgrade(Canvas canvas, Drawable image) {
-        float r = gameBoard.getTileRadius();
         float cy = getHeight()/2;
         float cx = getWidth()/2;
 
-        float scale = 2 * (r/150);
+        float scale = getHeight()/1150.0f;
         Drawable scaled = new ScaleDrawable(image, Gravity.CENTER, scale, scale);
         //image.setBounds((int)(cx-r), (int)(cy-r*(S/2)), (int)(cx +r), (int)(cy+r*(S/2)));
         if (image != null) {
-            image.setBounds(350, 150, 500, 300);
+            image.setBounds(0, 0, getWidth(), getHeight());
             image.draw(canvas);
         }
     }
