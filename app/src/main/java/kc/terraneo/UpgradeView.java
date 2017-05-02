@@ -3,7 +3,6 @@ package kc.terraneo;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.util.AttributeSet;
@@ -19,7 +18,6 @@ public class UpgradeView extends View {
 
     private GameBoard gameBoard;
     private GameWindow gameWindow;
-    private Paint rowPaint;
     private Client parent;
     private int identifier;
     private Activity activity;
@@ -31,15 +29,9 @@ public class UpgradeView extends View {
         gameBoard = board;
         gameWindow = window;
         activity = context;
-        rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        rowPaint.setColor(0xffff0000); // sets the color of the grid
-        rowPaint.setStrokeWidth(2); // sets line width of the grid
     }
     public UpgradeView(Context context, AttributeSet atters){
         super(context, atters);
-        rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        rowPaint.setColor(0xffff0000); // sets the color of the grid
-        rowPaint.setStrokeWidth(2); // sets line width of the grid
         activity = (Activity) context;
         // setOnTouchListener(this);
     }
@@ -56,12 +48,9 @@ public class UpgradeView extends View {
     }
 
     private void drawUpgrade(Canvas canvas, Drawable image) {
-        float cy = getHeight()/2;
-        float cx = getWidth()/2;
 
         float scale = getHeight()/1150.0f;
         Drawable scaled = new ScaleDrawable(image, Gravity.CENTER, scale, scale);
-        //image.setBounds((int)(cx-r), (int)(cy-r*(S/2)), (int)(cx +r), (int)(cy+r*(S/2)));
         if (image != null) {
             image.setBounds(0, 0, getWidth(), getHeight());
             image.draw(canvas);
@@ -87,7 +76,7 @@ public class UpgradeView extends View {
         }
         String path = u.getArtPath();
         if (path == null) {
-            path = "card_crime.png";
+            path = "";
         }
         switch(path) {
             case "card_chaos.png": upgradeImage = activity.getResources().getDrawable(R.drawable.card_chaos);

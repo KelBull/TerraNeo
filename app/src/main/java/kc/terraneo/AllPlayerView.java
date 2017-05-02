@@ -21,15 +21,9 @@ public class AllPlayerView extends View {
         parent = context;
         gameBoard = board;
         gameWindow = window;
-        rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        rowPaint.setColor(0xffff0000); // sets the color of the grid
-        rowPaint.setStrokeWidth(2); // sets line width of the grid
     }
     public AllPlayerView(Client context, AttributeSet atters){
         super(context, atters);
-        rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        rowPaint.setColor(0xffff0000); // sets the color of the grid
-        rowPaint.setStrokeWidth(2); // sets line width of the grid
         // setOnTouchListener(this);
     }
 
