@@ -112,7 +112,6 @@ public class TileView extends View implements View.OnTouchListener {
         canvas.drawColor(0xff000000); //set the color of the background
 
         drawHex(canvas);
-        Tile t;
         switch(identifier) {
             case 1: t = gameWindow.getTileSource1().peek();
                 break;
