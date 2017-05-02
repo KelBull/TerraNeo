@@ -61,9 +61,20 @@ public class Client extends AppCompatActivity {
         tilePile.setWindow(gameWindow);
         tilePile.setIdentifier(4);
 
-        //UpgradeView upgrade = (UpgradeView) findViewById(R.id.grid);
-        //upgrade.setBoard(board);
-        //upgrade.setWindow(gameWindow);
+        UpgradeView upgrade = (UpgradeView) findViewById(R.id.upgradeOne);
+        upgrade.setBoard(board);
+        upgrade.setWindow(gameWindow);
+        upgrade.setIdentifier(1);
+
+        upgrade = (UpgradeView) findViewById(R.id.upgradeTwo);
+        upgrade.setBoard(board);
+        upgrade.setWindow(gameWindow);
+        upgrade.setIdentifier(2);
+
+        upgrade = (UpgradeView) findViewById(R.id.upgradeThree);
+        upgrade.setBoard(board);
+        upgrade.setWindow(gameWindow);
+        upgrade.setIdentifier(3);
 
         isRunning = true;
         startTurn(currentPlayer);

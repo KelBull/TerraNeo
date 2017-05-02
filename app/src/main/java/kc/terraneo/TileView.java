@@ -103,10 +103,8 @@ public class TileView extends View implements View.OnTouchListener {
         canvas.drawColor(0xff000000); //set the color of the background
 
         drawHex(canvas);
-        //tileImage = activity.getResources().getDrawable(R.drawable.violent_earth);
         Tile t;
-        switch(identifier)
-        {
+        switch(identifier) {
             case 1: t = gameWindow.getTileSource1().peek();
                 break;
             case 2: t = gameWindow.getTileSource2().peek();
@@ -118,8 +116,7 @@ public class TileView extends View implements View.OnTouchListener {
             default: t= new EmptyTile(new OffBoardPosition());
         }
         String path = t.getArtPath();
-        switch(path)
-        {
+        switch(path) {
             case "violent_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_earth);
                 break;
             case "agitated_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_earth);
@@ -150,13 +147,11 @@ public class TileView extends View implements View.OnTouchListener {
 
     }
 
-
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             //This is where we do click and drag stuff!
             //TODO: IMPLEMENT
-
         }
         return false;
     }

@@ -41,11 +41,26 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="match_parent"
+                    <kc.terraneo.UpgradeView
+                        android:id="@+id/upgradeOne"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Upgrades" />
+                        android:layout_weight="1"/>
+
+                    <kc.terraneo.UpgradeView
+                        android:id="@+id/upgradeTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <kc.terraneo.UpgradeView
+                        android:id="@+id/upgradeThree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+
+
                 </LinearLayout>
 
                 <LinearLayout

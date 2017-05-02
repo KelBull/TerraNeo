@@ -7,7 +7,6 @@ import kc.terraneo.Upgrade;
  */
 
 public class Invention extends Upgrade {
-    private String artPath;
 
     public Invention(){
         setCost(2);

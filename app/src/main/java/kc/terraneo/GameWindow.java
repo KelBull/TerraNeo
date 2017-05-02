@@ -1,21 +1,11 @@
 package kc.terraneo;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import kc.terraneo.R;
 import kc.terraneo.upgrades.Chaos;
 import kc.terraneo.upgrades.Cities;
 import kc.terraneo.upgrades.Crime;
@@ -167,6 +157,7 @@ public class GameWindow{
     public UpgradeSource getUpgradeSource3() {
         return uS3;
     }
+
     public TileSource getTileSource1() {
         return tS1;
     }

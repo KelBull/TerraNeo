@@ -391,7 +391,7 @@ public class GridView extends View implements View.OnTouchListener {
                 }
             }
             Drawable tileImage = activity.getResources().getDrawable(R.drawable.empty_hex);
-         drawTile(canvas, radius, radius, tileImage);
+            drawTile(canvas, radius, radius, tileImage);
       }
 }
 

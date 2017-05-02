@@ -7,7 +7,6 @@ import kc.terraneo.Upgrade;
  */
 
 public class Magic extends Upgrade {
-    private String artPath;
 
     public Magic()
     {
