@@ -10,7 +10,7 @@ public class SourceTile extends Tile {
     public SourceTile()
     {
         super();
-        artPath = "source_tile.png";
+        artPath = "source_hex.png";
         isPassable = true;
     }
 

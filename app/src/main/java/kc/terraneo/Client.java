@@ -81,6 +81,24 @@ public class Client extends AppCompatActivity {
         currentplayer.setBoard(board);
         currentplayer.setWindow(gameWindow);
 
+        /*
+        AllPlayerView player = (AllPlayerView) findViewById(R.id.playerOne);
+        player.setBoard(board);
+        player.setWindow(gameWindow);
+
+        player = (AllPlayerView) findViewById(R.id.playerTwo);
+        player.setBoard(board);
+        player.setWindow(gameWindow);
+
+        player = (AllPlayerView) findViewById(R.id.playerThree);
+        player.setBoard(board);
+        player.setWindow(gameWindow);
+
+        player = (AllPlayerView) findViewById(R.id.playerFour);
+        player.setBoard(board);
+        player.setWindow(gameWindow);
+        */
+
         isRunning = true;
         startTurn(currentPlayer);
        //ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);

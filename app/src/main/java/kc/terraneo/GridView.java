@@ -8,10 +8,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -412,7 +410,8 @@ public class GridView extends View implements View.OnTouchListener {
                     drawHex(canvas, column, row);
                 }
             }
-            // Drawable tileImage = activity.getResources().getDrawable(R.drawable.empty_hex);
+            Drawable tileSource = activity.getResources().getDrawable(R.drawable.source_hex);
+            drawTile(canvas, radius, radius, tileSource);
 
         for (int row = 0; row < numTiles; row++) {
             for (int column = firstColumn(row, radius); column <= lastColumn(row, radius); column++) {
