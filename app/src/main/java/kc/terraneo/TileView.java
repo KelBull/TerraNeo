@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,11 +20,13 @@ public class TileView extends View implements View.OnTouchListener {
 
     private GameBoard gameBoard;
     private GameWindow gameWindow;
+    private Tile t;
     private Activity activity;
     private Paint rowPaint;
     private Client parent;
     private int identifier;
     private Drawable tileImage;
+    private Position viewLocation;
     public static final float S = (float) Math.sqrt(3); //square root of 3
 
     public TileView(Client context, GameBoard board, GameWindow window){
@@ -35,6 +38,9 @@ public class TileView extends View implements View.OnTouchListener {
         rowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
+        viewLocation = new Position(new OffBoardPosition());
+        identifier = 0;
+        setOnTouchListener(this);
     }
     public TileView(Context context, AttributeSet atters){
         super(context, atters);
@@ -42,7 +48,9 @@ public class TileView extends View implements View.OnTouchListener {
         rowPaint.setColor(0xffff0000); // sets the color of the grid
         rowPaint.setStrokeWidth(2); // sets line width of the grid
         activity = (Activity) context;
-       // setOnTouchListener(this);
+        viewLocation = new Position(new OffBoardPosition());
+        identifier = 0;
+        setOnTouchListener(this);
     }
 
     public void setBoard (GameBoard board){
@@ -55,6 +63,7 @@ public class TileView extends View implements View.OnTouchListener {
     {
         identifier = i;
     }
+    public void setViewLocation(Position p){viewLocation = p;}
 
     private void drawHex(Canvas canvas) { //draws a hex
         float cy = getHeight()/2;
@@ -113,10 +122,15 @@ public class TileView extends View implements View.OnTouchListener {
                 break;
             case 4: t = gameWindow.getTileSource4().peek();
                 break;
-            default: t= new EmptyTile(new OffBoardPosition());
+            default: t= new EmptyTile(gameBoard, new OffBoardPosition());
+        }
+        if(!viewLocation.equals(new OffBoardPosition())&&identifier==0)
+        {
+            t = gameBoard.getTileAt(viewLocation);
         }
         String path = t.getArtPath();
-        switch(path) {
+        switch(path)
+        {
             case "violent_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_earth);
                 break;
             case "agitated_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_earth);
@@ -141,17 +155,25 @@ public class TileView extends View implements View.OnTouchListener {
                 break;
             case "calm_water.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_water);
                 break;
-            default: tileImage = activity.getResources().getDrawable(R.drawable.source_tile);
+            default: tileImage = activity.getResources().getDrawable(R.drawable.empty_hex);
         }
         drawTile(canvas, tileImage);
 
     }
 
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
-            //This is where we do click and drag stuff!
-            //TODO: IMPLEMENT
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                //This is where we do click and drag stuff!
+                //TODO: IMPLEMENT
+
+                Log.i ("terraneo", "clicking on tile " + t.toString());
+
+                gameWindow.pushTileOne(t);
+                break;
+
         }
         return false;
     }

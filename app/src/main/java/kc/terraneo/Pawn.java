@@ -88,4 +88,10 @@ class Pawn extends BoardObject {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        String result = "Pawn belonging to: " + owner +" with god "+owner.getGod() + " at location: "+ location +" color: "+color;
+        return result;
+    }
 }

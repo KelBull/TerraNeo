@@ -16,6 +16,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
 GAME BOARD SET UP
@@ -30,6 +33,8 @@ public class GridView extends View implements View.OnTouchListener {
     private GameWindow gameWindow;
     private Paint rowPaint;
     private Client parent;
+    private Canvas canvasC;
+    private Map<String, Drawable> tileImages;
     int hexSize = 50;
     private float r;
     public static final float S = (float) Math.sqrt(3); //square root of 3
@@ -50,6 +55,7 @@ public class GridView extends View implements View.OnTouchListener {
         activity = context;
         radius = gameBoard.getRadius();
         setOnTouchListener(this);
+        tileImages = new HashMap<>();
     }
 
     public GridView(Context context, AttributeSet atters) {
@@ -59,6 +65,7 @@ public class GridView extends View implements View.OnTouchListener {
         rowPaint.setStrokeWidth(2); // sets line width of the grid
         activity = (Activity) context;
         setOnTouchListener(this);
+        tileImages = new HashMap<>();
     }
 
     public void setBoard (GameBoard board){
@@ -68,6 +75,10 @@ public class GridView extends View implements View.OnTouchListener {
     public void setWindow (GameWindow window){
         gameWindow = window;
         radius = gameBoard.getRadius();
+    }
+    public void setParent(Client c)
+    {
+        parent = c;
     }
 
     public boolean AddTile(Tile tile, float x, float y)
@@ -104,8 +115,10 @@ public class GridView extends View implements View.OnTouchListener {
         {
             row = maxSize-1;
         }
+        Tile t = gameBoard.getTileAt(column, row);
         Log.i ("terraneo", "found " + x + "," + y + " at " + column + "," + row);
-        return gameBoard.getTileAt(column, row);
+        Log.i ("terraneo", "found Tile "+ t );
+        return t;
     }
 
     private void drawHex(Canvas canvas, int x, int y) { //draws a hex
@@ -349,7 +362,7 @@ public class GridView extends View implements View.OnTouchListener {
         float cx = computeCenterX(column);
         cy = computeCenterY(column, row);
         float scale = 2 * (r/150);
-        Drawable scaled = new ScaleDrawable(image, Gravity.CENTER, scale, scale);
+        //Drawable scaled = new ScaleDrawable(image, Gravity.CENTER, scale, scale);
         image.setBounds((int)(cx-r), (int)(cy-r*(S/2)), (int)(cx +r), (int)(cy+r*(S/2)));
        // image.setBounds(350,150,500,300);
         image.draw(canvas);
@@ -358,17 +371,26 @@ public class GridView extends View implements View.OnTouchListener {
     public boolean onTouch (View view, MotionEvent event)
     {
         switch (event.getAction()){
-               case MotionEvent.ACTION_DOWN:
-               ChooseTile (event.getX(), event.getY());
-                break;
+               case MotionEvent.ACTION_DOWN: Tile t = ChooseTile (event.getX(), event.getY());
+                   Log.i("debugging", "Tile:" +t);
+                    if(gameWindow.pushLocationTwo(t.getLocation(), parent.getCurrentPlayer()))
+                    {
+                        Log.i("pushing ",t.getLocation()+" ");
+                        //Drawable d = findResource(t.getArtPath());
+                        //drawTile(canvasC,t.getLocation().getX(), t.getLocation().getY(), d);
+                        invalidate();
+                        return true;
+                    }
+                   break;
         }
         return false;
     }
         @Override
-     protected void onDraw (Canvas canvas)
-     { //draws the grid\
+    protected void onDraw (Canvas canvas)
+    { //draws the grid\
 
             super.onDraw(canvas);
+         canvasC = canvas;
             canvas.drawColor(0xff000000); //set the color of the background
             float h = getHeight()-30; //gets the height of the screen
             float w = getWidth()-30; //gets the width of the screen
@@ -390,9 +412,58 @@ public class GridView extends View implements View.OnTouchListener {
                     drawHex(canvas, column, row);
                 }
             }
-            Drawable tileImage = activity.getResources().getDrawable(R.drawable.empty_hex);
-            drawTile(canvas, radius, radius, tileImage);
-      }
+            // Drawable tileImage = activity.getResources().getDrawable(R.drawable.empty_hex);
+
+        for (int row = 0; row < numTiles; row++) {
+            for (int column = firstColumn(row, radius); column <= lastColumn(row, radius); column++) {
+
+                Tile t = gameBoard.getTileAt(column, row);
+                Drawable tileImage = findResource(t.getArtPath());
+                drawTile(canvas, row, column, tileImage);
+                Log.i("neo gen", "drawing tile: "+t);
+            }
+        }
+    }
+
+    protected Drawable findResource(String artPath)
+    {
+        Drawable tileImage;
+        if(tileImages.containsKey(artPath))
+        {
+            return tileImages.get(artPath);
+        }
+        switch(artPath)
+        {
+            case "violent_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_earth);
+                break;
+            case "agitated_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_earth);
+                break;
+            case "calm_earth.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_earth);
+                break;
+            case "violent_wind.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_wind);
+                break;
+            case "agitated_wind.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_wind);
+                break;
+            case "calm_wind.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_wind);
+                break;
+            case "violent_fire.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_fire);
+                break;
+            case "agitated_fire.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_fire);
+                break;
+            case "calm_fire.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_fire);
+                break;
+            case "violent_water.png": tileImage = activity.getResources().getDrawable(R.drawable.violent_water);
+                break;
+            case "agitated_water.png": tileImage = activity.getResources().getDrawable(R.drawable.agitated_water);
+                break;
+            case "calm_water.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_water);
+                break;
+            default: tileImage = activity.getResources().getDrawable(R.drawable.empty_hex);
+        }
+        tileImages.put(artPath,tileImage);
+        return tileImage;
+    }
+
 }
 
 

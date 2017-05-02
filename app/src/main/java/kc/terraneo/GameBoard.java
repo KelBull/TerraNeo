@@ -1,5 +1,7 @@
 package kc.terraneo;
 
+import android.util.Log;
+
 /**
  * Created by Kelsey Bull on 1/27/2017.
  */
@@ -48,13 +50,14 @@ public class GameBoard {
         {
             for(int j=0; j<gridSide; j++)
             {
-                if(i != radius && j != radius)
+                if(i==radius&&j==radius)
                 {
-                    tiles[i][j] = new EmptyTile(new Position(i,j));
+                    tiles[radius][radius] = new SourceTile(radius);
+                }else {
+                    tiles[i][j] = new EmptyTile(this, new Position(i, j));
                 }
             }
         }
-        tiles[radius][radius] = new SourceTile(radius);
     }
 
     /**
@@ -63,6 +66,7 @@ public class GameBoard {
      */
     public void playTile(Tile t)
     {
+        Log.i("GameBoard Playing Tile:", toString());
         int x = t.getLocation().getX();
         int y = t.getLocation().getY();
         tiles[x][y] = t;

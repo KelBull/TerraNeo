@@ -153,4 +153,10 @@ public class Player {
             legalActions.add(new BuyUpgrade(this, locT, u3.getCost(), u3));
         }
     }
+
+    @Override
+    public String toString() {
+        String result = "Player: "+name+ " with god: "+myGod;
+        return result;
+    }
 }

@@ -1,6 +1,7 @@
 package kc.terraneo;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +131,7 @@ class Tile extends BoardObject {
 
     public ArrayList<Tile> getExtendedNeighbors()
     {
+        Log.i("getExtendedNeighbors", this.toString());
         ArrayList<Tile> eNeighbors = new ArrayList<>();
         for (Tile t: neighbors)
         {
@@ -184,4 +186,9 @@ class Tile extends BoardObject {
         return false;
     }
 
+    public String toString()
+    {
+        String result = "Tile at " + location.toString() +" "+ resonanceValues[resonance]+ " "+color;
+        return result;
+    }
 }

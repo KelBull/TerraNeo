@@ -40,6 +40,7 @@ public class Client extends AppCompatActivity {
         GridView grid = (GridView) findViewById(R.id.grid);
         grid.setBoard(board);
         grid.setWindow(gameWindow);
+        grid.setParent(this);
 
         TileView tilePile = (TileView) findViewById(R.id.pileOne);
         tilePile.setBoard(board);
@@ -156,5 +157,9 @@ public class Client extends AppCompatActivity {
         else
             return false;
     }
+
+    public Player getCurrentPlayer(){ return currentPlayer;}
+    public GameWindow getGameWindow(){return gameWindow;}
+    public GameBoard getBoard(){return board;}
 
 }

@@ -2,6 +2,7 @@ package kc.terraneo;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +27,7 @@ import kc.terraneo.upgrades.War;
 import kc.terraneo.upgrades.Wealth;
 
 public class GameWindow{
-    private GameBoard gBoard;
+    private GameBoard gameBoard;
     private UpgradeSource uS1;
     private UpgradeSource uS2;
     private UpgradeSource uS3;
@@ -39,20 +40,25 @@ public class GameWindow{
     private ArrayList<Player> players;
     private Intent intent;
     private int playerCount;
+    private Position tracker1;
+    private Position tracker2;
+    private Tile tileTracker1;
+    private Tile tileTracker2;
+    private boolean tileFlag1;
 
     //God[] remainingGods;
 
 
     public GameWindow(GameBoard gB)
     {
-        gBoard = gB;
-        playerCount = gBoard.getPlayerCount();
+        gameBoard = gB;
+        playerCount = gameBoard.getPlayerCount();
         String godName;
         players = new ArrayList<Player>();
         for(int i=0; i< playerCount; i++)
         {
             godName = God.getGodNames()[i];
-            players.add(new Player("Player"+i, new God(godName), gBoard, this));
+            players.add(new Player("Player"+i, new God(godName), gameBoard, this));
         }
 
         populateTileList();
@@ -89,6 +95,11 @@ public class GameWindow{
         uS2 = new UpgradeSource(u2);
         uS3 = new UpgradeSource(u3);
 
+        tracker1 = new OffBoardPosition();
+        tracker2 = new OffBoardPosition();
+        tileTracker1 = new EmptyTile(gameBoard, tracker1);
+        tileTracker2 = new EmptyTile(gameBoard, tracker2);
+        tileFlag1 = false;
     }
     /**
      * starts the game client up for a new session. This should only ever be run once/game
@@ -113,10 +124,10 @@ public class GameWindow{
         {
             for(int j = 1; j<4; j++)
             {
-                masterTileList.add(new Tile(gBoard, j, Color.RED, new OffBoardPosition()));
-                masterTileList.add(new Tile(gBoard, j, Color.GREEN, new OffBoardPosition()));
-                masterTileList.add(new Tile(gBoard, j, Color.YELLOW, new OffBoardPosition()));
-                masterTileList.add(new Tile(gBoard, j, Color.BLUE, new OffBoardPosition()));
+                masterTileList.add(new Tile(gameBoard, j, Color.RED, new OffBoardPosition()));
+                masterTileList.add(new Tile(gameBoard, j, Color.GREEN, new OffBoardPosition()));
+                masterTileList.add(new Tile(gameBoard, j, Color.YELLOW, new OffBoardPosition()));
+                masterTileList.add(new Tile(gameBoard, j, Color.BLUE, new OffBoardPosition()));
             }
         }
 
@@ -172,6 +183,39 @@ public class GameWindow{
 
     public TileSource getTileSource4() {
         return tS4;
+    }
+
+    public boolean pushLocationOne(Position p)
+    {
+        tracker1 = p;
+        return true;
+    }
+
+    public boolean pushTileOne(Tile t)
+    {
+        tileTracker1 = t;
+        tileFlag1 = true;
+        return true;
+    }
+    public boolean pushLocationTwo(Position p, Player currentPlayer)
+    {
+        Tile temp = gameBoard.getTileAt(p);
+       // if(Create.isValid(p, currentPlayer.getPawn())&&tileFlag1)
+        if(tileTracker1 == null)
+        {
+            return false;
+        }else
+        {
+            Pawn pawn = currentPlayer.getPawn();
+            Log.i("debugging", "TileTracker1: "+tileTracker1);
+            Log.i("debugging", "Position:"+p);
+            Log.i("debugging", "Pawn:"+pawn);
+            Create c = new Create(tileTracker1, p, pawn);
+            c.execute();
+            tileFlag1 = false;
+            tileTracker1 = new EmptyTile( gameBoard, new OffBoardPosition());
+            return true;
+        }
     }
 
 }
