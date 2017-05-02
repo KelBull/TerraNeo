@@ -49,7 +49,7 @@ public class UpgradeView extends View {
 
     private void drawUpgrade(Canvas canvas, Drawable image) {
 
-        float scale = getHeight()/1150.0f;
+        float scale = getHeight()/1275.0f;
         Drawable scaled = new ScaleDrawable(image, Gravity.CENTER, scale, scale);
         if (image != null) {
             image.setBounds(0, 0, getWidth(), getHeight());

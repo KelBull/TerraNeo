@@ -77,6 +77,10 @@ public class Client extends AppCompatActivity {
         upgrade.setWindow(gameWindow);
         upgrade.setIdentifier(3);
 
+        CurrentPlayerView currentplayer = (CurrentPlayerView) findViewById(R.id.currentPlayer);
+        currentplayer.setBoard(board);
+        currentplayer.setWindow(gameWindow);
+
         isRunning = true;
         startTurn(currentPlayer);
        //ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
