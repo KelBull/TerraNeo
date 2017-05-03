@@ -71,67 +71,7 @@ public class GameBoard {
         int y = t.getLocation().getY();
         tiles[x][y] = t;
 
-        if(x%2==0)
-        {//evens columns
-            if(x == 0)
-            {
-                t.addNeighbor(tiles[x+1][y]);
-                if(y!=0)
-                {
-                    t.addNeighbor(tiles[x][y-1]);
-                }
-                if(y!=gridSide-1)
-                {
-                    t.addNeighbor(tiles[x][y+1]);
-                    t.addNeighbor(tiles[x+1][y+1]);
-                }
-            }else{//done the 0 column
-
-                if (x == gridSide - 1) {
-                    t.addNeighbor(tiles[x - 1][y]);
-                    if(y!=0)
-                    {
-                        t.addNeighbor(tiles[x][y-1]);
-                    }
-                    if(y!=gridSide-1)
-                    {
-                        t.addNeighbor(tiles[x][y+1]);
-                        t.addNeighbor(tiles[x-1][y+1]);
-                    }
-                }else{//done the far right column, doing all normal even columns
-
-                    if(y !=0 )
-                    {
-                        t.addNeighbor(tiles[x][y-1]);
-                    }
-                    if(y != gridSide-1)
-                    {
-                        t.addNeighbor(tiles[x][y+1]);
-                        t.addNeighbor(tiles[x+1][y+1]);
-                        t.addNeighbor(tiles[x-1][y+1]);
-                    }
-                    t.addNeighbor(tiles[x-1][y]);
-                    t.addNeighbor(tiles[x+1][y]);
-                }
-            }
-        }else{//odd columns
-            if(y!=0)
-            {
-                t.addNeighbor(tiles[x][y-1]);
-                t.addNeighbor(tiles[x-1][y-1]);
-                t.addNeighbor(tiles[x+1][y-1]);
-            }
-            if(y != gridSide-1)
-            {
-                t.addNeighbor(tiles[x][y+1]);
-            }
-            t.addNeighbor(tiles[x+1][y]);
-            t.addNeighbor(tiles[x-1][y]);
-        }
-        for(Tile _t: t.getNeighbors())
-        {
-            _t.addNeighbor(t);
-        }
+        t.updateNeighbors(tiles);
     }
 
     public void movePawn(Pawn p, Position destination)
