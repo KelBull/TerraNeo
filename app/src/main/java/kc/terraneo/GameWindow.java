@@ -45,6 +45,7 @@ public class GameWindow{
     private Tile tileTracker1;
     private Tile tileTracker2;
     private boolean tileFlag1;
+    private int sourceTracker;
 
     //God[] remainingGods;
 
@@ -95,6 +96,7 @@ public class GameWindow{
         uS2 = new UpgradeSource(u2);
         uS3 = new UpgradeSource(u3);
 
+        sourceTracker = 0;
         tracker1 = new OffBoardPosition();
         tracker2 = new OffBoardPosition();
         tileTracker1 = new EmptyTile(gameBoard, tracker1);
@@ -191,9 +193,9 @@ public class GameWindow{
         return true;
     }
 
-    public boolean pushTileOne(Tile t)
+    public boolean pushTileOne(int sourceID)
     {
-        tileTracker1 = t;
+        sourceTracker = sourceID;
         tileFlag1 = true;
         return true;
     }
@@ -201,19 +203,34 @@ public class GameWindow{
     {
         Tile temp = gameBoard.getTileAt(p);
        // if(Create.isValid(p, currentPlayer.getPawn())&&tileFlag1)
-        if(tileTracker1 == null)
+        if(sourceTracker<=0||sourceTracker>=5)
         {
             return false;
         }else
         {
             Pawn pawn = currentPlayer.getPawn();
-            Log.i("debugging", "TileTracker1: "+tileTracker1);
-            Log.i("debugging", "Position:"+p);
-            Log.i("debugging", "Pawn:"+pawn);
+            switch(sourceTracker)
+            {
+                case 1: tileTracker1 = tS1.pop();
+                    break;
+                case 2: tileTracker1 = tS2.pop();
+                    break;
+                case 3: tileTracker1 = tS3.pop();
+                    break;
+                case 4: tileTracker1 = tS4.pop();
+                    break;
+                default: tileTracker1 = new EmptyTile( gameBoard, new OffBoardPosition());
+                    break;
+            }
+            Log.i("GW debugging", "SourceTracker: "+sourceTracker);
+            Log.i("GW debugging", "TileTracker1: "+tileTracker1);
+            Log.i("GW debugging", "Position:"+p);
+            Log.i("GW debugging", "Pawn:"+pawn);
             Create c = new Create(tileTracker1, p, pawn);
             c.execute();
             tileFlag1 = false;
             tileTracker1 = new EmptyTile( gameBoard, new OffBoardPosition());
+            sourceTracker = 0;
             return true;
         }
     }

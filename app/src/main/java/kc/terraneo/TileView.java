@@ -168,9 +168,11 @@ public class TileView extends View implements View.OnTouchListener {
                 //This is where we do click and drag stuff!
                 //TODO: IMPLEMENT
 
-                Log.i ("terraneo", "clicking on tile " + t.toString());
+                Log.i ("TileView", "clicking on tile " + t.toString());
+                Log.i ("TileView", "from source " + identifier);
 
-                gameWindow.pushTileOne(t);
+                gameWindow.pushTileOne(identifier);
+                invalidate();
                 break;
 
         }

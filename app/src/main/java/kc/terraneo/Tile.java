@@ -131,6 +131,7 @@ class Tile extends BoardObject {
 
     public void updateNeighbors(Tile[][] tiles)
     {
+        Log.i("Update Neighbors", "Starting update on "+this);
         neighbors.clear();
 
         int x = location.getX();
@@ -194,10 +195,8 @@ class Tile extends BoardObject {
             addNeighbor(tiles[x+1][y]);
             addNeighbor(tiles[x-1][y]);
         }
-        for(Tile t:neighbors)
-        {
-            t.updateNeighbors(tiles);
-        }
+
+        Log.i("Update Neighbors", "Finished update for "+this);
     }
 
     public ArrayList<Tile> getExtendedNeighbors()

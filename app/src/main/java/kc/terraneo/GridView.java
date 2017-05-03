@@ -31,7 +31,6 @@ public class GridView extends View implements View.OnTouchListener {
     private GameWindow gameWindow;
     private Paint rowPaint;
     private Client parent;
-    private Canvas canvasC;
     private Map<String, Drawable> tileImages;
     int hexSize = 50;
     private float r;
@@ -376,6 +375,7 @@ public class GridView extends View implements View.OnTouchListener {
                         Log.i("pushing ",t.getLocation()+" ");
                         //Drawable d = findResource(t.getArtPath());
                         //drawTile(canvasC,t.getLocation().getX(), t.getLocation().getY(), d);
+
                         invalidate();
                         return true;
                     }
@@ -388,7 +388,6 @@ public class GridView extends View implements View.OnTouchListener {
     { //draws the grid\
 
             super.onDraw(canvas);
-         canvasC = canvas;
             canvas.drawColor(0xff000000); //set the color of the background
             float h = getHeight()-30; //gets the height of the screen
             float w = getWidth()-30; //gets the width of the screen

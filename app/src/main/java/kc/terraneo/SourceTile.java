@@ -7,9 +7,10 @@ package kc.terraneo;
 
 public class SourceTile extends Tile {
 
-    public SourceTile()
+    public SourceTile(GameBoard bG)
     {
         super();
+        theBoard = bG;
         artPath = "source_hex.png";
         isPassable = true;
     }
@@ -18,8 +19,12 @@ public class SourceTile extends Tile {
      *
      * @param radius the radius of the GameBoard
      */
-    public SourceTile(int radius)
+    public SourceTile(GameBoard bG, int radius)
     {
+        super();
+        theBoard = bG;
+        artPath = "source_hex.png";
+        isPassable = true;
         location = new Position(radius, radius);
     }
 }

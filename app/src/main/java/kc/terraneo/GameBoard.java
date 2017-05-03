@@ -52,7 +52,7 @@ public class GameBoard {
             {
                 if(i==radius&&j==radius)
                 {
-                    tiles[radius][radius] = new SourceTile(radius);
+                    tiles[radius][radius] = new SourceTile(this, radius);
                 }else {
                     tiles[i][j] = new EmptyTile(this, new Position(i, j));
                 }
@@ -71,7 +71,12 @@ public class GameBoard {
         int y = t.getLocation().getY();
         tiles[x][y] = t;
 
-        //t.updateNeighbors(tiles);
+        t.updateNeighbors(tiles);
+
+       /* for(Tile _t:t.getNeighbors())
+        {
+            _t.updateNeighbors(tiles);
+        }*/
     }
 
     public void movePawn(Pawn p, Position destination)
