@@ -71,7 +71,7 @@ public class GameBoard {
         int y = t.getLocation().getY();
         tiles[x][y] = t;
 
-        t.updateNeighbors(tiles);
+        //t.updateNeighbors(tiles);
     }
 
     public void movePawn(Pawn p, Position destination)

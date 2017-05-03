@@ -102,7 +102,7 @@
 
             </LinearLayout>
 
-            <kc.terraneo.CurrentPlayerView
+            <View
                 android:id="@+id/currentPlayer"
                 android:layout_width="match_parent"
                 android:layout_height="108dp" />
