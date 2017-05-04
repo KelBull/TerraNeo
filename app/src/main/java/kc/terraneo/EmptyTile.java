@@ -6,10 +6,11 @@ package kc.terraneo;
 
 public class EmptyTile extends Tile {
 
-    public EmptyTile(Position p)
+    public EmptyTile(GameBoard gB, Position p)
     {
         super();
-        position = p;
+        theBoard = gB;
+        location = p;
         artPath = "black_tile.png";
     }
 

@@ -7,7 +7,6 @@ import kc.terraneo.Upgrade;
  */
 
 public class War extends Upgrade {
-    private String artPath;
 
     public War()
     {

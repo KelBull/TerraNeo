@@ -7,7 +7,6 @@ import kc.terraneo.Upgrade;
  */
 
 public class Chaos extends Upgrade {
-    private String artPath;
 
     public Chaos()
     {

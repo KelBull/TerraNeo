@@ -1,21 +1,12 @@
 package kc.terraneo;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import kc.terraneo.R;
 import kc.terraneo.upgrades.Chaos;
 import kc.terraneo.upgrades.Cities;
 import kc.terraneo.upgrades.Crime;
@@ -36,42 +27,40 @@ import kc.terraneo.upgrades.War;
 import kc.terraneo.upgrades.Wealth;
 
 public class GameWindow{
-    GameBoard gBoard;
-    UpgradeSource uS1;
-    UpgradeSource uS2;
-    UpgradeSource uS3;
-    TileSource tS1;
-    TileSource tS2;
-    TileSource tS3;
-    TileSource tS4;
-    ArrayList<Tile> masterTileList;
-    ArrayList<Upgrade> masterUpgradeList;
-    ArrayList<Player> players;
-    Intent intent;
+    private GameBoard gameBoard;
+    private UpgradeSource uS1;
+    private UpgradeSource uS2;
+    private UpgradeSource uS3;
+    private TileSource tS1;
+    private TileSource tS2;
+    private TileSource tS3;
+    private TileSource tS4;
+    private ArrayList<Tile> masterTileList;
+    private ArrayList<Upgrade> masterUpgradeList;
+    private ArrayList<Player> players;
+    private Intent intent;
     private int playerCount;
+    private Position tracker1;
+    private Position tracker2;
+    private Tile tileTracker1;
+    private Tile tileTracker2;
+    private boolean tileFlag1;
+    private int sourceTracker;
 
     //God[] remainingGods;
 
 
     public GameWindow(GameBoard gB)
     {
-        gBoard = gB;
-        playerCount = gBoard.getPlayerCount();
+        gameBoard = gB;
+        playerCount = gameBoard.getPlayerCount();
         String godName;
         players = new ArrayList<Player>();
         for(int i=0; i< playerCount; i++)
         {
             godName = God.getGodNames()[i];
-            players.add(new Player("Player"+i, new God(godName), gBoard));
+            players.add(new Player("Player"+i, new God(godName), gameBoard, this));
         }
-
-       /* remainingGods  = new God[6];
-        remainingGods[0] = new God("fskt");
-        remainingGods[1] = new God("shaelys");
-        remainingGods[2] = new God("pundr");
-        remainingGods[3] = new God("lomhae");
-        remainingGods[4] = new God("tkyrll");
-        remainingGods[5] = new God("zolack");*/
 
         populateTileList();
         Collections.shuffle(masterTileList);
@@ -107,45 +96,13 @@ public class GameWindow{
         uS2 = new UpgradeSource(u2);
         uS3 = new UpgradeSource(u3);
 
+        sourceTracker = 0;
+        tracker1 = new OffBoardPosition();
+        tracker2 = new OffBoardPosition();
+        tileTracker1 = new EmptyTile(gameBoard, tracker1);
+        tileTracker2 = new EmptyTile(gameBoard, tracker2);
+        tileFlag1 = false;
     }
-
-    /*
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super(requestCode, resultCode, data);
-        switch(resultCode){
-            case 10000:
-           // numPlayers = resultCode-999;
-                break;
-            case 10010:
-                players.add(new Player(remainingGods[0]));
-                remainingGods[0]=null;
-                break;
-            case 10011:
-                players.add(new Player(remainingGods[1]));
-                remainingGods[1]=null;
-                break;
-            case 10012:
-                players.add(new Player(remainingGods[2]));
-                remainingGods[2]=null;
-                break;
-            case 10013:
-                players.add(new Player(remainingGods[3]));
-                remainingGods[3]=null;
-                break;
-            case 10014:
-                players.add(new Player(remainingGods[4]));
-                remainingGods[4]=null;
-                break;
-            case 10015:
-                players.add(new Player(remainingGods[5]));
-                remainingGods[5]=null;
-                break;
-
-
-        }
-    }*/
-
     /**
      * starts the game client up for a new session. This should only ever be run once/game
      */
@@ -169,10 +126,10 @@ public class GameWindow{
         {
             for(int j = 1; j<4; j++)
             {
-                masterTileList.add(new Tile(gBoard, j, Color.RED, new OffBoardPosition()));
-                masterTileList.add(new Tile(gBoard, j, Color.GREEN, new OffBoardPosition()));
-                masterTileList.add(new Tile(gBoard, j, Color.YELLOW, new OffBoardPosition()));
-                masterTileList.add(new Tile(gBoard, j, Color.BLUE, new OffBoardPosition()));
+                masterTileList.add(new Tile(gameBoard, j, Color.RED, new OffBoardPosition()));
+                masterTileList.add(new Tile(gameBoard, j, Color.GREEN, new OffBoardPosition()));
+                masterTileList.add(new Tile(gameBoard, j, Color.YELLOW, new OffBoardPosition()));
+                masterTileList.add(new Tile(gameBoard, j, Color.BLUE, new OffBoardPosition()));
             }
         }
 
@@ -201,4 +158,81 @@ public class GameWindow{
     {
         return players;
     }
+
+    public UpgradeSource getUpgradeSource1() {
+        return uS1;
+    }
+
+    public UpgradeSource getUpgradeSource2() {
+        return uS2;
+    }
+
+    public UpgradeSource getUpgradeSource3() {
+        return uS3;
+    }
+
+    public TileSource getTileSource1() {
+        return tS1;
+    }
+
+    public TileSource getTileSource2() {
+        return tS2;
+    }
+
+    public TileSource getTileSource3() {
+        return tS3;
+    }
+
+    public TileSource getTileSource4() {
+        return tS4;
+    }
+
+    public boolean pushLocationOne(Position p)
+    {
+        tracker1 = p;
+        return true;
+    }
+
+    public boolean pushTileOne(int sourceID)
+    {
+        sourceTracker = sourceID;
+        tileFlag1 = true;
+        return true;
+    }
+    public boolean pushLocationTwo(Position p, Player currentPlayer)
+    {
+        Tile temp = gameBoard.getTileAt(p);
+       // if(Create.isValid(p, currentPlayer.getPawn())&&tileFlag1)
+        if(sourceTracker<=0||sourceTracker>=5)
+        {
+            return false;
+        }else
+        {
+            Pawn pawn = currentPlayer.getPawn();
+            switch(sourceTracker)
+            {
+                case 1: tileTracker1 = tS1.pop();
+                    break;
+                case 2: tileTracker1 = tS2.pop();
+                    break;
+                case 3: tileTracker1 = tS3.pop();
+                    break;
+                case 4: tileTracker1 = tS4.pop();
+                    break;
+                default: tileTracker1 = new EmptyTile( gameBoard, new OffBoardPosition());
+                    break;
+            }
+            Log.i("GW debugging", "SourceTracker: "+sourceTracker);
+            Log.i("GW debugging", "TileTracker1: "+tileTracker1);
+            Log.i("GW debugging", "Position:"+p);
+            Log.i("GW debugging", "Pawn:"+pawn);
+            Create c = new Create(tileTracker1, p, pawn);
+            c.execute();
+            tileFlag1 = false;
+            tileTracker1 = new EmptyTile( gameBoard, new OffBoardPosition());
+            sourceTracker = 0;
+            return true;
+        }
+    }
+
 }

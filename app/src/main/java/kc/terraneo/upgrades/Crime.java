@@ -7,7 +7,6 @@ import kc.terraneo.Upgrade;
  */
 
 public class Crime extends Upgrade {
-    private String artPath;
 
     public Crime()
     {

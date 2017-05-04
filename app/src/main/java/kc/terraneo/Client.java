@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 
 public class Client extends AppCompatActivity {
@@ -17,11 +16,13 @@ public class Client extends AppCompatActivity {
     private int currentPlayerNum;
     private int actionCount;
     private int remainingTurns;
+    private boolean isRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -34,10 +35,74 @@ public class Client extends AppCompatActivity {
         currentPlayer = gameWindow.getPlayers().get(0);
         currentPlayerNum = 0;
         actionCount = 0;
-        remainingTurns = Integer.MAX_VALUE;
 
-        ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
-        V.addView(new GridView(this, board, gameWindow));
+        remainingTurns = Integer.MAX_VALUE;
+        GridView grid = (GridView) findViewById(R.id.grid);
+        grid.setBoard(board);
+        grid.setWindow(gameWindow);
+        grid.setParent(this);
+
+        TileView tilePile = (TileView) findViewById(R.id.pileOne);
+        tilePile.setBoard(board);
+        tilePile.setWindow(gameWindow);
+        tilePile.setIdentifier(1);
+
+        tilePile = (TileView) findViewById(R.id.pileTwo);
+        tilePile.setBoard(board);
+        tilePile.setWindow(gameWindow);
+        tilePile.setIdentifier(2);
+
+        tilePile = (TileView) findViewById(R.id.pileThree);
+        tilePile.setBoard(board);
+        tilePile.setWindow(gameWindow);
+        tilePile.setIdentifier(3);
+
+        tilePile = (TileView) findViewById(R.id.pileFour);
+        tilePile.setBoard(board);
+        tilePile.setWindow(gameWindow);
+        tilePile.setIdentifier(4);
+
+        UpgradeView upgrade = (UpgradeView) findViewById(R.id.upgradeOne);
+        upgrade.setBoard(board);
+        upgrade.setWindow(gameWindow);
+        upgrade.setIdentifier(1);
+
+        upgrade = (UpgradeView) findViewById(R.id.upgradeTwo);
+        upgrade.setBoard(board);
+        upgrade.setWindow(gameWindow);
+        upgrade.setIdentifier(2);
+
+        upgrade = (UpgradeView) findViewById(R.id.upgradeThree);
+        upgrade.setBoard(board);
+        upgrade.setWindow(gameWindow);
+        upgrade.setIdentifier(3);
+
+       /* CurrentPlayerView currentplayer = (CurrentPlayerView) findViewById(R.id.currentPlayer);
+        currentplayer.setBoard(board);
+        currentplayer.setWindow(gameWindow);*/
+
+        /*
+        AllPlayerView player = (AllPlayerView) findViewById(R.id.playerOne);
+        player.setBoard(board);
+        player.setWindow(gameWindow);
+
+        player = (AllPlayerView) findViewById(R.id.playerTwo);
+        player.setBoard(board);
+        player.setWindow(gameWindow);
+
+        player = (AllPlayerView) findViewById(R.id.playerThree);
+        player.setBoard(board);
+        player.setWindow(gameWindow);
+
+        player = (AllPlayerView) findViewById(R.id.playerFour);
+        player.setBoard(board);
+        player.setWindow(gameWindow);
+        */
+
+        isRunning = true;
+        startTurn(currentPlayer);
+       //ViewGroup V = (ViewGroup)findViewById(R.id.activity_grid);
+       //V.addView(new GridView(this, board, gameWindow));
     }
 
     @Override
@@ -61,7 +126,18 @@ public class Client extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void passTurn()
+    /**
+     * runs the game
+     * I don't actually know if we need this or not
+    private void runGame()
+    {
+        while(isRunning)
+        {
+            startTurn(currentPlayer);
+        }
+    }*/
+
+    private void passTurn()
     {
         if(remainingTurns==0)
         {
@@ -87,20 +163,25 @@ public class Client extends AppCompatActivity {
         startTurn(currentPlayer);
     }
 
-    public void startTurn(Player p)
+    private void startTurn(Player p)
     {
         actionCount = 0;
-        p.getGod().setLastActionTaken(null);
+        p.setLastActionTaken(null);
+        p.updateLegalActions();
 
         //TODO: change the UI so that the current player's god is centered. highlight their pawn.
     }
 
-    public boolean doesGameEnd()
+    private boolean doesGameEnd()
     {
         if(currentPlayer.getGod().getTempleCount()==0)
             return true;
         else
             return false;
     }
+
+    public Player getCurrentPlayer(){ return currentPlayer;}
+    public GameWindow getGameWindow(){return gameWindow;}
+    public GameBoard getBoard(){return board;}
 
 }

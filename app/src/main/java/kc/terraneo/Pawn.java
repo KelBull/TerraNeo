@@ -12,7 +12,7 @@ import java.util.List;
 class Pawn extends BoardObject {
     private int color;
     private Player owner;
-    protected List<Tile> legalMoves = new ArrayList<Tile>();
+    protected ArrayList<Tile> legalMoves = new ArrayList<Tile>();
 
     public Pawn(int playerColor, Player _owner)
     {
@@ -52,7 +52,7 @@ class Pawn extends BoardObject {
     private void updateLegalMoves()
     {
         legalMoves.clear();
-        List<Tile> possibleMoves = theBoard.getTileAt(location).getNeighbors();
+        ArrayList<Tile> possibleMoves = theBoard.getTileAt(location).getNeighbors();
         for (Tile t:possibleMoves){
             if(t.isPassable())
             {//checks if it is a passable tile
@@ -75,6 +75,8 @@ class Pawn extends BoardObject {
         }
     }
 
+    public ArrayList<Tile> getLegalMoves() { return legalMoves;}
+
     public boolean isInRange(Tile target)
     {
         Tile start =  theBoard.getTileAt(location);
@@ -85,5 +87,11 @@ class Pawn extends BoardObject {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        String result = "Pawn belonging to: " + owner +" with god "+owner.getGod() + " at location: "+ location +" color: "+color;
+        return result;
     }
 }

@@ -34,4 +34,20 @@ public class Position {
     {
         return true;
     }
+
+    public boolean equals(Position p)
+    {
+        if(p.getX()==x && p.getY() == y)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+
+    public String toString()
+    {
+        return "Position: "+x+", "+y;
+    }
 }

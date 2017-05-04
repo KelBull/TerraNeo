@@ -7,7 +7,6 @@ import kc.terraneo.Upgrade;
  */
 
 public class Plague extends Upgrade {
-    private String artPath;
 
     public Plague(){
         setCost(2);

@@ -22,7 +22,7 @@ public class DestructionAction extends MajorAction {
         Position p = target.getLocation();
         target.setOffBoard();
         tarSource.push(target);
-        EmptyTile t = new EmptyTile(p);
+        EmptyTile t = new EmptyTile(target.getBoard(), p);
         target.getBoard().playTile(t);
     }
 

@@ -1,6 +1,7 @@
 package kc.terraneo;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,10 @@ class Tile extends BoardObject {
     protected boolean hasTemple;
     private int resonance;
     protected int color;
-    private Temple t;
+    private Temple myTemple;
     protected boolean isPassable;
-    protected String artPath;
-    protected Position position;
+    //protected String artPath;
+    //protected Position position;
     public static String[] resonanceValues = {"empty","calm","agitated","violent"};
     protected ArrayList<Tile> neighbors = new ArrayList<Tile>();
 
@@ -46,7 +47,7 @@ class Tile extends BoardObject {
                 break;
             case Color.BLUE: artPath += "water";
                 break;
-            case Color.YELLOW: artPath += "air";
+            case Color.YELLOW: artPath += "wind";
                 break;
             case Color.GREEN: artPath += "earth";
                 break;
@@ -61,7 +62,7 @@ class Tile extends BoardObject {
         hasTemple = false;
         isSiphoned = false;
         isPassable = false;
-        position = new Position(0,0);
+        location = new Position(0,0);
         color = Color.BLACK;
         resonance = 0;
         artPath = "black_tile.png";
@@ -106,7 +107,7 @@ class Tile extends BoardObject {
     public void addTemple(Temple _t)
     {
         hasTemple = true;
-        t = _t;
+        myTemple = _t;
     }
 
     public boolean isSiphoned()
@@ -128,8 +129,79 @@ class Tile extends BoardObject {
         return neighbors;
     }
 
+    public void updateNeighbors(Tile[][] tiles)
+    {
+        Log.i("Update Neighbors", "Starting update on "+this);
+        neighbors.clear();
+
+        int x = location.getX();
+        int y = location.getY();
+        int gridSide = theBoard.getGridSide();
+
+        if(x%2==0)
+        {//evens columns
+            if(x == 0)
+            {
+                addNeighbor(tiles[x+1][y]);
+                if(y!=0)
+                {
+                    addNeighbor(tiles[x][y-1]);
+                }
+                if(y!=gridSide-1)
+                {
+                    addNeighbor(tiles[x][y+1]);
+                    addNeighbor(tiles[x+1][y+1]);
+                }
+            }else{//done the 0 column
+
+                if (x == gridSide - 1) {
+                    addNeighbor(tiles[x - 1][y]);
+                    if(y!=0)
+                    {
+                        addNeighbor(tiles[x][y-1]);
+                    }
+                    if(y!=gridSide-1)
+                    {
+                        addNeighbor(tiles[x][y+1]);
+                        addNeighbor(tiles[x-1][y+1]);
+                    }
+                }else{//done the far right column, doing all normal even columns
+
+                    if(y !=0 )
+                    {
+                        addNeighbor(tiles[x][y-1]);
+                    }
+                    if(y != gridSide-1)
+                    {
+                        addNeighbor(tiles[x][y+1]);
+                        addNeighbor(tiles[x+1][y+1]);
+                        addNeighbor(tiles[x-1][y+1]);
+                    }
+                    addNeighbor(tiles[x-1][y]);
+                    addNeighbor(tiles[x+1][y]);
+                }
+            }
+        }else{//odd columns
+            if(y!=0)
+            {
+                addNeighbor(tiles[x][y-1]);
+                addNeighbor(tiles[x-1][y-1]);
+                addNeighbor(tiles[x+1][y-1]);
+            }
+            if(y != gridSide-1)
+            {
+                addNeighbor(tiles[x][y+1]);
+            }
+            addNeighbor(tiles[x+1][y]);
+            addNeighbor(tiles[x-1][y]);
+        }
+
+        Log.i("Update Neighbors", "Finished update for "+this);
+    }
+
     public ArrayList<Tile> getExtendedNeighbors()
     {
+        Log.i("getExtendedNeighbors", this.toString());
         ArrayList<Tile> eNeighbors = new ArrayList<>();
         for (Tile t: neighbors)
         {
@@ -176,7 +248,7 @@ class Tile extends BoardObject {
 
     public Temple getTemple()
     {
-        return t;
+        return myTemple;
     }
 
     public boolean isEmptyTile()
@@ -184,4 +256,9 @@ class Tile extends BoardObject {
         return false;
     }
 
+    public String toString()
+    {
+        String result = "Tile at " + location.toString() +" "+ resonanceValues[resonance]+ " "+color;
+        return result;
+    }
 }

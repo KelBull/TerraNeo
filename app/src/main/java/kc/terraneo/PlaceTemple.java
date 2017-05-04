@@ -19,5 +19,6 @@ public class PlaceTemple extends MajorAction {
     @Override
     public void execute() {
         t.place(p);
+        t.theBoard.getTileAt(p).addTemple(t);
     }
 }

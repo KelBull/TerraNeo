@@ -7,7 +7,6 @@ import kc.terraneo.Upgrade;
  */
 
 public class Destruction extends Upgrade {
-    private String artPath;
 
     public Destruction(){
         setCost(3);

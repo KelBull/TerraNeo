@@ -1,5 +1,7 @@
 package kc.terraneo;
 
+import android.util.Log;
+
 /**
  * Created by Kelsey Bull on 1/27/2017.
  */
@@ -9,7 +11,16 @@ public class GameBoard {
     private int radius;
     private int gridSide;
     private Tile[][] tiles;
+    private int scaledSize;
+    private float tileRadius = 30;
 
+    public float getTileRadius() {
+        return tileRadius;
+    }
+
+    public void setTileRadius(float tileRadius) {
+        this.tileRadius = tileRadius;
+    }
 
     /**
      * Creates a new GameBoard
@@ -30,21 +41,20 @@ public class GameBoard {
                 break;
             case 6: radius = 5;
                 break;
-            //default: throw new IllegalPlayerCountException("Illegal player count "+ _numPlayers +" is not a legal player count");
 
         }
         gridSide = 2*radius+1;
         tiles = new Tile[gridSide][gridSide];
-
+        scaledSize = 0;
         for(int i=0; i< gridSide; i++)
         {
             for(int j=0; j<gridSide; j++)
             {
-                if(i != radius && j != radius)
+                if(i==radius&&j==radius)
                 {
-                    tiles[i][j] = new EmptyTile(new Position(i,j));
-                }else{
-                    tiles[radius][radius] = new SourceTile();
+                    tiles[radius][radius] = new SourceTile(this, radius);
+                }else {
+                    tiles[i][j] = new EmptyTile(this, new Position(i, j));
                 }
             }
         }
@@ -56,71 +66,17 @@ public class GameBoard {
      */
     public void playTile(Tile t)
     {
+        Log.i("GameBoard Playing Tile:", toString());
         int x = t.getLocation().getX();
         int y = t.getLocation().getY();
         tiles[x][y] = t;
 
-        if(x%2==0)
-        {//evens columns
-            if(x == 0)
-            {
-                t.addNeighbor(tiles[x+1][y]);
-                if(y!=0)
-                {
-                    t.addNeighbor(tiles[x][y-1]);
-                }
-                if(y!=gridSide-1)
-                {
-                    t.addNeighbor(tiles[x][y+1]);
-                    t.addNeighbor(tiles[x+1][y+1]);
-                }
-            }else{//done the 0 column
+        t.updateNeighbors(tiles);
 
-                if (x == gridSide - 1) {
-                    t.addNeighbor(tiles[x - 1][y]);
-                    if(y!=0)
-                    {
-                        t.addNeighbor(tiles[x][y-1]);
-                    }
-                    if(y!=gridSide-1)
-                    {
-                        t.addNeighbor(tiles[x][y+1]);
-                        t.addNeighbor(tiles[x-1][y+1]);
-                    }
-                }else{//done the far right column, doing all normal even columns
-
-                    if(y !=0 )
-                    {
-                        t.addNeighbor(tiles[x][y-1]);
-                    }
-                    if(y != gridSide-1)
-                    {
-                        t.addNeighbor(tiles[x][y+1]);
-                        t.addNeighbor(tiles[x+1][y+1]);
-                        t.addNeighbor(tiles[x-1][y+1]);
-                    }
-                    t.addNeighbor(tiles[x-1][y]);
-                    t.addNeighbor(tiles[x+1][y]);
-                }
-            }
-        }else{//odd columns
-            if(y!=0)
-            {
-                t.addNeighbor(tiles[x][y-1]);
-                t.addNeighbor(tiles[x-1][y-1]);
-                t.addNeighbor(tiles[x+1][y-1]);
-            }
-            if(y != gridSide-1)
-            {
-                t.addNeighbor(tiles[x][y+1]);
-            }
-            t.addNeighbor(tiles[x+1][y]);
-            t.addNeighbor(tiles[x-1][y]);
-        }
-        for(Tile _t: t.getNeighbors())
+       /* for(Tile _t:t.getNeighbors())
         {
-            _t.addNeighbor(t);
-        }
+            _t.updateNeighbors(tiles);
+        }*/
     }
 
     public void movePawn(Pawn p, Position destination)
@@ -161,5 +117,17 @@ public class GameBoard {
     public int getPlayerCount()
     {
         return numPlayers;
+    }
+
+    public int getGridSide(){return gridSide;}
+
+    public void setScaledSize(int r)
+    {
+        scaledSize = r;
+    }
+
+    public int getScaledSize()
+    {
+        return scaledSize;
     }
 }

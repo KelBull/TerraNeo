@@ -6,6 +6,7 @@ package kc.terraneo;
 
 public abstract class Upgrade {
 
+    protected String artPath;
     protected int cost;
     protected String name;
 
@@ -18,6 +19,8 @@ public abstract class Upgrade {
     {
         return name;
     };
+
+    public String getArtPath() {return  artPath;};
 
     protected void setName(String n)
     {
