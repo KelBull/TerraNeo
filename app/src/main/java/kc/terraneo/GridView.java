@@ -372,6 +372,7 @@ public class GridView extends View implements View.OnTouchListener {
         switch (event.getAction()){
                case MotionEvent.ACTION_DOWN: Tile t = ChooseTile (event.getX(), event.getY());
                    Log.i("debugging", "Tile:" +t);
+                   int sourceVal = gameWindow.getSourceTracker();
                     if(gameWindow.pushLocationTwo(t.getLocation(), parent.getCurrentPlayer()))
                     {
                         Log.i("pushing ",t.getLocation()+" ");
@@ -379,6 +380,27 @@ public class GridView extends View implements View.OnTouchListener {
                         //drawTile(canvasC,t.getLocation().getX(), t.getLocation().getY(), d);
 
                         invalidate();
+                        TileView tV;
+                        switch (sourceVal)
+                        {
+                            case 1: tV= parent.getTileSource1();
+                                tV.invalidate();
+                                break;
+                            case 2:
+                                tV = parent.getTileSource2();
+                                tV.invalidate();
+                                break;
+
+                            case 3:
+                                tV = parent.getTileSource3();
+                                tV.invalidate();
+                                break;
+
+                            case 4:
+                                tV = parent.getTileSource4();
+                                tV.invalidate();
+                                break;
+                        }
                         return true;
                     }
                    break;

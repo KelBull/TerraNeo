@@ -235,4 +235,5 @@ public class GameWindow{
         }
     }
 
+    public int getSourceTracker(){return sourceTracker;}
 }

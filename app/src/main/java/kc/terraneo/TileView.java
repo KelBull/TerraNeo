@@ -126,7 +126,7 @@ public class TileView extends View implements View.OnTouchListener {
                 break;
             case 4: t = gameWindow.getTileSource4().peek();
                 break;
-            default: t= new EmptyTile(gameBoard, new OffBoardPosition());
+            //default: t= new EmptyTile(gameBoard, new OffBoardPosition());
         }
         if(!viewLocation.equals(new OffBoardPosition())&&identifier==0)
         {

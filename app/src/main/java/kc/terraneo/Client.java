@@ -17,6 +17,10 @@ public class Client extends AppCompatActivity {
     private int actionCount;
     private int remainingTurns;
     private boolean isRunning;
+    private TileView tilePile1;
+    private TileView tilePile2;
+    private TileView tilePile3;
+    private TileView tilePile4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +46,25 @@ public class Client extends AppCompatActivity {
         grid.setWindow(gameWindow);
         grid.setParent(this);
 
-        TileView tilePile = (TileView) findViewById(R.id.pileOne);
-        tilePile.setBoard(board);
-        tilePile.setWindow(gameWindow);
-        tilePile.setIdentifier(1);
+        tilePile1 = (TileView) findViewById(R.id.pileOne);
+        tilePile1.setBoard(board);
+        tilePile1.setWindow(gameWindow);
+        tilePile1.setIdentifier(1);
 
-        tilePile = (TileView) findViewById(R.id.pileTwo);
-        tilePile.setBoard(board);
-        tilePile.setWindow(gameWindow);
-        tilePile.setIdentifier(2);
+        tilePile2 = (TileView) findViewById(R.id.pileTwo);
+        tilePile2.setBoard(board);
+        tilePile2.setWindow(gameWindow);
+        tilePile2.setIdentifier(2);
 
-        tilePile = (TileView) findViewById(R.id.pileThree);
-        tilePile.setBoard(board);
-        tilePile.setWindow(gameWindow);
-        tilePile.setIdentifier(3);
+        tilePile3 = (TileView) findViewById(R.id.pileThree);
+        tilePile3.setBoard(board);
+        tilePile3.setWindow(gameWindow);
+        tilePile3.setIdentifier(3);
 
-        tilePile = (TileView) findViewById(R.id.pileFour);
-        tilePile.setBoard(board);
-        tilePile.setWindow(gameWindow);
-        tilePile.setIdentifier(4);
+        tilePile4 = (TileView) findViewById(R.id.pileFour);
+        tilePile4.setBoard(board);
+        tilePile4.setWindow(gameWindow);
+        tilePile4.setIdentifier(4);
 
         UpgradeView upgrade = (UpgradeView) findViewById(R.id.upgradeOne);
         upgrade.setBoard(board);
@@ -183,5 +187,8 @@ public class Client extends AppCompatActivity {
     public Player getCurrentPlayer(){ return currentPlayer;}
     public GameWindow getGameWindow(){return gameWindow;}
     public GameBoard getBoard(){return board;}
-
+    public TileView getTileSource1(){return tilePile1;}
+    public TileView getTileSource2(){return tilePile2;}
+    public TileView getTileSource3(){return tilePile3;}
+    public TileView getTileSource4(){return tilePile4;}
 }
