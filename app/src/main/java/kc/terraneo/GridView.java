@@ -65,12 +65,14 @@ public class GridView extends View implements View.OnTouchListener {
         for (column = 0; column < radius*2+1; column++){
             float cx = computeCenterX(column);
             if (edgeX < cx){
+                //return new IllegalTile(gameBoard, new OffBoardPosition());
                 break;
             }
         }
         for (row = 0; row< radius*2+1; row++){
             float cy = computeCenterY(column, row);
             if (edgeY > cy){
+                //return new IllegalTile(gameBoard, new OffBoardPosition());
                 break;
             }
         }

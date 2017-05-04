@@ -8,8 +8,9 @@ import android.graphics.Color;
 
 public class IllegalTile extends Tile {
 
-    public IllegalTile(Position p)
+    public IllegalTile(GameBoard gB, Position p)
     {
+        theBoard = gB;
         isPassable = false;
         hasPlayer = false;
         hasTemple = false;
