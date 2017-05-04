@@ -89,6 +89,11 @@ public class TileView extends View implements View.OnTouchListener {
         canvas.drawLine(Dx, Dy, Ex, Ey, rowPaint); //Point D to E
         canvas.drawLine(Ex, Ey, Fx, Fy, rowPaint); //Point E to F
         canvas.drawLine(Fx, Fy, Ax, Ay, rowPaint); //Point F to A
+
+
+
+
+
        // Log.i("neo gen", "drawing hex " + x + "," + y + " centered at " + cx + "," + cy);
 //        Log.i("neo gen", "points: "+Ax+","+Ay+" "+Bx+","+By+" "+
 //                Cx+","+Cy+" "+Dx+","+Dy+" "+Ex+","+Ey+" "+Fx+","+Fy);
