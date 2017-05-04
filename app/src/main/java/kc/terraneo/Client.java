@@ -85,8 +85,8 @@ public class Client extends AppCompatActivity {
         currentplayer.setBoard(board);
         currentplayer.setWindow(gameWindow);
 
-        /*
-        AllPlayerView player = (AllPlayerView) findViewById(R.id.playerOne);
+
+       /* AllPlayerView player = (AllPlayerView) findViewById(R.id.playerOne);
         player.setBoard(board);
         player.setWindow(gameWindow);
 
@@ -100,8 +100,8 @@ public class Client extends AppCompatActivity {
 
         player = (AllPlayerView) findViewById(R.id.playerFour);
         player.setBoard(board);
-        player.setWindow(gameWindow);
-        */
+        player.setWindow(gameWindow);*/
+
 
         isRunning = true;
         startTurn(currentPlayer);

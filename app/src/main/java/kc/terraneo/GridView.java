@@ -432,8 +432,8 @@ public class GridView extends View implements View.OnTouchListener {
                     drawHex(canvas, column, row);
                 }
             }
-            Drawable tileSource = activity.getResources().getDrawable(R.drawable.source_hex);
-            drawTile(canvas, radius, radius, tileSource);
+            //Drawable tileSource = activity.getResources().getDrawable(R.drawable.source_hex);
+            //drawTile(canvas, radius, radius, tileSource);
 
         for (int row = 0; row < numTiles; row++) {
             for (int column = firstColumn(row, radius); column <= lastColumn(row, radius); column++) {
@@ -443,6 +443,8 @@ public class GridView extends View implements View.OnTouchListener {
                 drawTile(canvas, row, column, tileImage);
                 Log.i("neo gen", "drawing tile: "+t);
             }
+            Drawable tileSource = activity.getResources().getDrawable(R.drawable.source_hex);
+            drawTile(canvas, radius, radius, tileSource);
         }
     }
 
@@ -480,8 +482,10 @@ public class GridView extends View implements View.OnTouchListener {
             case "calm_water.png": tileImage = activity.getResources().getDrawable(R.drawable.calm_water);
                 break;
             default: tileImage = activity.getResources().getDrawable(R.drawable.empty_hex);
+
         }
         tileImages.put(artPath,tileImage);
+
         return tileImage;
     }
 

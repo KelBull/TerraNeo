@@ -45,19 +45,19 @@
                         android:id="@+id/upgradeOne"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
 
                     <kc.terraneo.UpgradeView
                         android:id="@+id/upgradeTwo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
 
                     <kc.terraneo.UpgradeView
                         android:id="@+id/upgradeThree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -105,7 +105,8 @@
             <kc.terraneo.CurrentPlayerView
                 android:id="@+id/currentPlayer"
                 android:layout_width="match_parent"
-                android:layout_height="108dp" />
+                android:layout_height="108dp"
+                android:layout_weight=".05" />
 
         </LinearLayout>
 
@@ -113,38 +114,39 @@
             android:id="@+id/grid"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="4" />
+            android:layout_weight="2.08" />
 
-        <LinearLayout
+        <!--<LinearLayout
             android:id="@+id/allPlayers"
-            android:layout_width="wrap_content"
+            android:layout_width="44dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0.29"
             android:orientation="vertical">
 
-           <!-- <kc.terraneo.AllPlayerView
+            <kc.terraneo.AllPlayerView
                 android:id="@+id/playerOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <kc.terraneo.AllPlayerView
                 android:id="@+id/playerTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <kc.terraneo.AllPlayerView
                 android:id="@+id/playerThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <kc.terraneo.AllPlayerView
                 android:id="@+id/playerFour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>-->
-            </LinearLayout>
+                android:layout_weight="1" />
+        </LinearLayout>-->
 
     </LinearLayout>
 
