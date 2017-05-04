@@ -386,7 +386,6 @@ public class GridView extends View implements View.OnTouchListener {
         @Override
     protected void onDraw (Canvas canvas)
     { //draws the grid\
-
             super.onDraw(canvas);
             canvas.drawColor(0xff000000); //set the color of the background
             float h = getHeight()-30; //gets the height of the screen
@@ -402,7 +401,7 @@ public class GridView extends View implements View.OnTouchListener {
             leftMargin = (getWidth()-(r*numTiles*1.5f))/2;
             topMargin = ((getHeight()-(r*numTiles*S))/2)-25;
 
-          Log.i("neo gen", "drawing grid with r="+r + " w =" +w +" h=" +h);
+         // Log.i("neo gen", "drawing grid with r="+r + " w =" +w +" h=" +h);
 
             for (int row = 0; row < numTiles; row++) {
                 for (int column = firstColumn(row, radius); column <= lastColumn(row, radius); column++) {
